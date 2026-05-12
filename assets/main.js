@@ -135,35 +135,94 @@ const sectionObserver = new IntersectionObserver(entries => {
 sections.forEach(s => sectionObserver.observe(s));
 
 /* ── Lightbox ── */
-(function() {
-  const backdrop = document.getElementById('lightbox');
-  const img      = document.getElementById('lightbox-img');
-  const title    = document.getElementById('lightbox-title');
-  const desc     = document.getElementById('lightbox-desc');
-  const closeBtn = document.getElementById('lightbox-close');
+(function () {
+  const lb        = document.getElementById('lightbox');
+  const overlay   = document.getElementById('lb-overlay');
+  const img       = document.getElementById('lb-img');
+  const imgWrap   = img.parentElement;
+  const titleEl   = document.getElementById('lb-title');
+  const descEl    = document.getElementById('lb-desc');
+  const tagEl     = document.getElementById('lb-tag');
+  const counter   = document.getElementById('lb-counter');
+  const btnClose  = document.getElementById('lb-close');
+  const btnPrev   = document.getElementById('lb-prev');
+  const btnNext   = document.getElementById('lb-next');
+  const btnZoom   = document.getElementById('lb-zoom');
+  const zoomIn    = document.getElementById('lb-zoom-in-icon');
+  const zoomOut   = document.getElementById('lb-zoom-out-icon');
 
-  function open(src, t, d) {
-    img.src = src; img.alt = t;
-    title.textContent = t;
-    desc.textContent  = d;
-    backdrop.classList.add('open');
+  let items = [];
+  let current = 0;
+  let zoomed = false;
+
+  function collect() {
+    items = Array.from(document.querySelectorAll('.portfolio-clickable'));
+  }
+
+  function show(index) {
+    if (!items.length) return;
+    current = (index + items.length) % items.length;
+    const card = items[current];
+
+    // Reset zoom
+    setZoom(false);
+
+    // Set content
+    img.src = card.dataset.lightbox;
+    img.alt = card.dataset.title || '';
+    titleEl.textContent = card.dataset.title || '';
+    descEl.textContent  = card.dataset.desc  || '';
+    tagEl.textContent   = card.dataset.tag   || 'Portfólio';
+
+    // Counter
+    counter.textContent = items.length > 1
+      ? (current + 1) + ' / ' + items.length
+      : '';
+
+    // Arrow visibility
+    btnPrev.style.display = items.length > 1 ? 'flex' : 'none';
+    btnNext.style.display = items.length > 1 ? 'flex' : 'none';
+  }
+
+  function open(index) {
+    collect();
+    lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(() => { img.src = ''; }, 300);
+    show(index);
   }
 
-  document.querySelectorAll('.portfolio-clickable').forEach(card => {
-    card.addEventListener('click', () => {
-      open(card.dataset.lightbox, card.dataset.title, card.dataset.desc);
-    });
+  function close() {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  function setZoom(state) {
+    zoomed = state;
+    img.classList.toggle('zoomed', zoomed);
+    imgWrap.classList.toggle('zoomed', zoomed);
+    zoomIn.classList.toggle('hidden', zoomed);
+    zoomOut.classList.toggle('hidden', !zoomed);
+  }
+
+  // Wire up portfolio cards
+  document.querySelectorAll('.portfolio-clickable').forEach((card, i) => {
+    card.style.cursor = 'zoom-in';
+    card.addEventListener('click', () => { collect(); open(items.indexOf(card)); });
   });
 
-  closeBtn.addEventListener('click', close);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  btnClose.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  btnPrev.addEventListener('click', (e) => { e.stopPropagation(); show(current - 1); });
+  btnNext.addEventListener('click', (e) => { e.stopPropagation(); show(current + 1); });
+  btnZoom.addEventListener('click', (e) => { e.stopPropagation(); setZoom(!zoomed); });
+
+  document.addEventListener('keydown', e => {
+    if (lb.style.display === 'none') return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
 })();
 
 /* ── Particles (lightweight canvas) ── */

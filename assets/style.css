@@ -251,45 +251,100 @@ body {
 }
 
 /* ── Lightbox ── */
-.lightbox-backdrop {
+#lightbox {
   position: fixed; inset: 0; z-index: 9990;
-  background: rgba(0,0,0,.92);
-  backdrop-filter: blur(12px);
+  flex-direction: column;
+  animation: lb-in .25s ease both;
+}
+@keyframes lb-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lb-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.93);
+  backdrop-filter: blur(14px);
+}
+
+/* Toolbar topo */
+.lb-toolbar {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .875rem 1.25rem;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  gap: 1rem;
+}
+.lb-caption-wrap { flex: 1; min-width: 0; }
+.lb-actions { display: flex; gap: .5rem; flex-shrink: 0; }
+
+.lb-btn {
+  width: 40px; height: 40px; border-radius: .625rem;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  padding: 1.5rem;
-  opacity: 0; pointer-events: none;
-  transition: opacity .3s ease;
-}
-.lightbox-backdrop.open {
-  opacity: 1; pointer-events: all;
-}
-.lightbox-content {
-  max-width: 90vw; max-height: 90vh;
-  display: flex; flex-direction: column; align-items: center; gap: 1rem;
-  transform: scale(.92);
-  transition: transform .3s ease;
-}
-.lightbox-backdrop.open .lightbox-content { transform: scale(1); }
-
-.lightbox-img {
-  max-width: 100%; max-height: 78vh;
-  object-fit: contain;
-  border-radius: 1rem;
-  box-shadow: 0 24px 80px rgba(0,0,0,.7);
-  border: 1px solid rgba(255,255,255,.08);
-}
-.lightbox-caption { text-align: center; }
-
-.lightbox-close {
-  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 9991;
-  width: 44px; height: 44px; border-radius: 50%;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.15);
-  color: #fff; display: flex; align-items: center; justify-content: center;
   transition: background .2s, transform .2s;
-  cursor: pointer;
 }
-.lightbox-close:hover { background: rgba(255,255,255,.2); transform: rotate(90deg); }
+.lb-btn:hover { background: rgba(255,255,255,.14); }
+.lb-btn--close:hover { background: rgba(220,50,50,.3); transform: rotate(90deg); }
+
+/* Stage central */
+.lb-stage {
+  position: relative; z-index: 1;
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 1rem 4.5rem;
+  min-height: 0;
+}
+
+.lb-img-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  transition: transform .25s ease;
+}
+.lb-img-wrap.zoomed { cursor: zoom-out; }
+
+.lb-img {
+  max-width: 100%; max-height: calc(100vh - 140px);
+  object-fit: contain;
+  border-radius: .875rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,.8);
+  border: 1px solid rgba(255,255,255,.07);
+  transition: transform .3s ease;
+  display: block;
+  user-select: none;
+}
+.lb-img.zoomed {
+  max-width: none; max-height: none;
+  transform: scale(1.8);
+}
+
+/* Nav arrows */
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.08);
+  color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+  z-index: 2;
+}
+.lb-nav:hover { background: rgba(212,168,67,.25); border-color: rgba(212,168,67,.4); }
+.lb-nav:disabled { opacity: .2; cursor: default; pointer-events: none; }
+.lb-nav--prev { left: .75rem; }
+.lb-nav--next { right: .75rem; }
+.lb-nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
+.lb-nav--next:hover { transform: translateY(-50%) translateX(2px); }
+
+/* Counter */
+.lb-counter {
+  position: relative; z-index: 2;
+  text-align: center; padding: .625rem;
+  font-size: .75rem; color: rgba(255,255,255,.4);
+  letter-spacing: .08em;
+}
 .portfolio-item:hover .portfolio-img { transform: scale(1.02); }
 .portfolio-overlay {
   position: absolute; inset: 0;
