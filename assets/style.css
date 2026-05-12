@@ -112,43 +112,40 @@ body {
 }
 .btn-ghost:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); transform: translateY(-1px); }
 
-/* ── Hero Video Background ── */
-.hero-video {
-  position: absolute;
+/* ══════════════════════════════════════════
+   VÍDEO DE FUNDO GLOBAL
+══════════════════════════════════════════ */
+#site-video-bg {
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  z-index: 0;
+  z-index: -2;
   pointer-events: none;
 }
 
-/* Overlay: escurece o vídeo para o texto ficar legível */
-.hero-video-overlay {
-  position: absolute;
+/* Overlay escuro sobre o vídeo — cobre o site inteiro */
+#site-video-overlay {
+  position: fixed;
   inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to bottom,
-      rgba(11,11,11,.55) 0%,
-      rgba(11,11,11,.30) 40%,
-      rgba(11,11,11,.55) 100%),
-    radial-gradient(ellipse 80% 60% at 70% 50%,
-      rgba(212,168,67,.08) 0%, transparent 60%);
+  z-index: -1;
+  background: rgba(5, 5, 5, 0.72);
+  pointer-events: none;
 }
 
-/* Partículas ficam acima do overlay */
-#particles-js { z-index: 2; }
+/* Seções com bg sólido viram semi-transparentes para o vídeo aparecer */
+#sobre,
+#parceiros,
+footer { background: rgba(10,10,10,.82) !important; }
 
-/* Conteúdo do hero acima de tudo */
-#inicio > .relative.z-10 { z-index: 3; }
+.bg-dark-2 { background: rgba(12,12,12,.80) !important; }
 
-/* ── Hero (fallback bg se vídeo falhar) ── */
+/* ── Hero fallback ── */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(212,168,67,.07) 0%, transparent 60%),
-              radial-gradient(ellipse 60% 80% at 10% 80%, rgba(212,168,67,.04) 0%, transparent 50%);
+  background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(212,168,67,.05) 0%, transparent 60%);
 }
 
 .hero-card-glow {
@@ -609,3 +606,56 @@ select.form-input option { background: var(--dark-3); }
   background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.3);
   border-radius: 1rem; padding: 2rem; text-align: center; color: #86efac;
 }
+
+/* ══════════════════════════════════════════
+   RESPONSIVO — MOBILE
+══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  #navbar .h-20 { height: 4rem; }
+  #inicio { min-height: 100svh; }
+  #inicio > div { padding-top: 6rem !important; padding-bottom: 3rem !important; }
+  #inicio h1 { font-size: 2.4rem !important; line-height: 1.15; }
+  #inicio p  { font-size: 1rem !important; }
+  #inicio .inline-flex.rounded-full { font-size: .7rem; padding: .3rem .75rem; white-space: normal; text-align: center; }
+  #inicio .flex.flex-wrap.gap-4 a { width: 100%; justify-content: center; padding: .875rem 1rem !important; font-size: .9rem !important; }
+  #inicio .flex.flex-wrap.gap-8.mt-14 { gap: 1.25rem; margin-top: 2rem !important; }
+  #inicio .counter { font-size: 1.75rem !important; }
+  .animate-float { display: none !important; }
+  .py-28 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+  .py-24 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+  .py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  .section-title { font-size: 1.75rem !important; }
+  .section-sub   { font-size: .9375rem !important; }
+  .grid.lg\:grid-cols-2, .grid.md\:grid-cols-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .grid.md\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: 1fr !important; }
+  #portfolio-grid { grid-template-columns: 1fr !important; }
+  .grid.md\:grid-cols-2.lg\:grid-cols-4 { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+  .grid.md\:grid-cols-3 { grid-template-columns: 1fr !important; }
+  .about-card-main { padding: 1rem !important; }
+  .about-card-main .col-span-2 { height: 9rem !important; }
+  .cta-banner { padding: 2.5rem 1.25rem !important; border-radius: 1.25rem !important; }
+  .cta-banner h2 { font-size: 1.75rem !important; }
+  .cta-banner .flex.flex-wrap { flex-direction: column; }
+  .cta-banner .flex.flex-wrap a { width: 100%; justify-content: center; }
+  .contact-info-card { padding: 1rem !important; }
+  .partners-frame { border-radius: 1rem !important; }
+  .partners-img   { height: 70px !important; }
+  .whatsapp-float { width: 50px; height: 50px; bottom: 1.25rem; right: 1.25rem; }
+  .whatsapp-float svg { width: 1.4rem; height: 1.4rem; }
+  .lb-nav   { width: 38px; height: 38px; }
+  .lb-stage { padding: .75rem 3rem; }
+  .form-input { font-size: .875rem; }
+  .px-6 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  #inicio h1 { font-size: 3rem !important; }
+  .animate-float { display: none !important; }
+  .grid.lg\:grid-cols-2 { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+  .grid.md\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: 1fr 1fr !important; }
+  .grid.md\:grid-cols-3 { grid-template-columns: 1fr 1fr !important; }
+  .section-title { font-size: 2rem !important; }
+}
+
+html, body { max-width: 100%; overflow-x: hidden; }
