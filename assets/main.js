@@ -134,6 +134,38 @@ const sectionObserver = new IntersectionObserver(entries => {
 
 sections.forEach(s => sectionObserver.observe(s));
 
+/* ── Lightbox ── */
+(function() {
+  const backdrop = document.getElementById('lightbox');
+  const img      = document.getElementById('lightbox-img');
+  const title    = document.getElementById('lightbox-title');
+  const desc     = document.getElementById('lightbox-desc');
+  const closeBtn = document.getElementById('lightbox-close');
+
+  function open(src, t, d) {
+    img.src = src; img.alt = t;
+    title.textContent = t;
+    desc.textContent  = d;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { img.src = ''; }, 300);
+  }
+
+  document.querySelectorAll('.portfolio-clickable').forEach(card => {
+    card.addEventListener('click', () => {
+      open(card.dataset.lightbox, card.dataset.title, card.dataset.desc);
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
 /* ── Particles (lightweight canvas) ── */
 (function() {
   const canvas = document.createElement('canvas');
