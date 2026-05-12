@@ -273,3 +273,31 @@ sections.forEach(s => sectionObserver.observe(s));
   }
   loop();
 })();
+
+/* ── Portfolio Video Players ── */
+document.querySelectorAll('.portfolio-img').forEach(wrap => {
+  const video   = wrap.querySelector('.pf-video');
+  if (!video) return;
+
+  const overlay   = wrap.querySelector('.pf-play-overlay');
+  const playBtn   = wrap.querySelector('.pf-play-btn');
+  const pauseBtn  = wrap.querySelector('.pf-pause-btn');
+
+  function startPlay() {
+    overlay.style.display  = 'none';
+    pauseBtn.style.display = 'flex';
+    video.play();
+  }
+
+  function stopPlay() {
+    video.pause();
+    overlay.style.display  = 'flex';
+    pauseBtn.style.display = 'none';
+  }
+
+  playBtn.addEventListener('click', (e) => { e.stopPropagation(); startPlay(); });
+  pauseBtn.addEventListener('click', (e) => { e.stopPropagation(); stopPlay(); });
+  video.addEventListener('ended', stopPlay);
+  // Clicking directly on the video while playing also pauses
+  video.addEventListener('click', () => { if (!video.paused) stopPlay(); });
+});
