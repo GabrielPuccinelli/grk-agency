@@ -261,27 +261,84 @@ body {
 }
 .testimonial-card:hover { border-color: rgba(212,168,67,.15); }
 
-/* ── Logo Marquee ── */
-.logos-track-wrapper { overflow: hidden; position: relative; }
-.logos-track-wrapper::before,
-.logos-track-wrapper::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
+/* ── Partners Dual Marquee ── */
+#parceiros {
+  background: #0d0d0d;
 }
-.logos-track-wrapper::before { left: 0; background: linear-gradient(to right, var(--dark-2), transparent); }
-.logos-track-wrapper::after { right: 0; background: linear-gradient(to left, var(--dark-2), transparent); }
 
-.logos-track {
-  display: flex; gap: 0;
-  animation: marquee 28s linear infinite;
+.partners-section-inner {
+  padding: 3rem 0;
+}
+
+.partners-row {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0;
+}
+
+/* Fade edges */
+.partners-fade-left,
+.partners-fade-right {
+  position: absolute; top: 0; bottom: 0; width: 180px; z-index: 2; pointer-events: none;
+}
+.partners-fade-left  { left:  0; background: linear-gradient(to right, #0d0d0d 0%, rgba(13,13,13,0) 100%); }
+.partners-fade-right { right: 0; background: linear-gradient(to left,  #0d0d0d 0%, rgba(13,13,13,0) 100%); }
+
+/* Track wrapper */
+.partners-track {
+  display: flex;
+  align-items: center;
   width: max-content;
+  will-change: transform;
+  gap: 0;
 }
-.logos-track:hover { animation-play-state: paused; }
 
-@keyframes marquee {
+/* Pause on hover */
+.partners-row:hover .partners-track { animation-play-state: paused; }
+
+/* Row 1 → left */
+.track-left  { animation: scroll-left  30s linear infinite; }
+
+/* Row 2 → right */
+.track-right { animation: scroll-right 30s linear infinite; }
+
+@keyframes scroll-left {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to   { transform: translateX(-33.3334%); }
 }
 
+@keyframes scroll-right {
+  from { transform: translateX(-33.3334%); }
+  to   { transform: translateX(0); }
+}
+
+/* Images */
+.partners-img {
+  height: 120px;
+  width: auto;
+  max-width: none;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity .4s, transform .4s;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+}
+
+.partners-row:hover .partners-img {
+  opacity: 1;
+}
+
+/* Divider lines between rows */
+.partners-divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,168,67,.3), transparent);
+  margin: 4px auto;
+}
+
+/* ── Legacy logo items (kept for safety) ── */
 .logo-item {
   display: flex; align-items: center; justify-content: center;
   min-width: 180px; height: 60px; padding: 0 2rem;
