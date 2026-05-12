@@ -89,8 +89,16 @@
 
   <!-- ░░ HERO ░░ -->
   <section id="inicio" class="relative min-h-screen flex items-center overflow-hidden">
-    <div class="hero-bg"></div>
-    <div id="particles-js" class="absolute inset-0 z-0"></div>
+
+    <!-- Vídeo de fundo -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="">
+      <source src="assets/hero-bg.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Overlay gradiente sobre o vídeo -->
+    <div class="hero-video-overlay"></div>
+
+    <div id="particles-js" class="absolute inset-0 z-1"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center">
       <div>

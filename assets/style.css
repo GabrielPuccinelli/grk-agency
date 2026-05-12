@@ -112,7 +112,39 @@ body {
 }
 .btn-ghost:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); transform: translateY(-1px); }
 
-/* ── Hero ── */
+/* ── Hero Video Background ── */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Overlay: escurece o vídeo para o texto ficar legível */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(11,11,11,.55) 0%,
+      rgba(11,11,11,.30) 40%,
+      rgba(11,11,11,.55) 100%),
+    radial-gradient(ellipse 80% 60% at 70% 50%,
+      rgba(212,168,67,.08) 0%, transparent 60%);
+}
+
+/* Partículas ficam acima do overlay */
+#particles-js { z-index: 2; }
+
+/* Conteúdo do hero acima de tudo */
+#inicio > .relative.z-10 { z-index: 3; }
+
+/* ── Hero (fallback bg se vídeo falhar) ── */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(212,168,67,.07) 0%, transparent 60%),
