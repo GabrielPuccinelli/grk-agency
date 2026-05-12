@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:grkproject41.wixsite.com)",
+      "PowerShell(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\gabri\\\\Desktop\\\\Grk\\\\assets\" -Force)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
