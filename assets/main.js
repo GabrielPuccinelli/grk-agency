@@ -90,8 +90,8 @@ filterBtns.forEach(btn => {
       item.style.transform = 'translateY(10px)';
 
       setTimeout(() => {
-        // showcase items are flex rows — use flex, not block
-        item.style.display = show ? 'flex' : 'none';
+        // showcase items are grid rows — use grid, not block
+        item.style.display = show ? 'grid' : 'none';
         if (show) {
           requestAnimationFrame(() => {
             item.style.transition = 'opacity .35s, transform .35s';
