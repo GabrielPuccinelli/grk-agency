@@ -583,10 +583,11 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria de design — sem aspect-ratio, altura definida pelo sizer */
+/* Moldura da galeria de design — aspect-ratio exato das imagens (3153×3573) */
 .pf-gallery-box {
   position: relative;
   width: 100%;
+  aspect-ratio: 3153 / 3573;
   border-radius: 1.5rem;
   overflow: hidden;
   border: 1px solid rgba(212,168,67,.22);
@@ -604,18 +605,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   z-index: 3; pointer-events: none;
 }
 
-/* Imagem "sizer": ocupa espaço normalmente (não absoluta), fica invisível.
-   Sua altura natural define a altura do frame sem JS. */
-.pf-fade-sizer {
-  display: block;
-  width: 100%;
-  height: auto;
-  visibility: hidden;
-  pointer-events: none;
-  user-select: none;
-}
+/* Sizer não é mais necessário (aspect-ratio fixo), mas mantido oculto */
+.pf-fade-sizer { display: none; }
 
-/* Imagens de crossfade: empilhadas sobre o sizer */
+/* Imagens de crossfade — preenchem o frame exato */
 .pf-fade-img {
   position: absolute;
   inset: 0;
