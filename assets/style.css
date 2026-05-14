@@ -573,7 +573,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   .pf-row-reverse .pf-col-media { order: unset; }
 }
 
-/* ── Design Gallery (scroll vertical) ── */
+/* ── Design Gallery (crossfade) ── */
 
 /* Âncoras ocultas — presentes no DOM mas invisíveis */
 .pf-lb-anchors {
@@ -583,34 +583,35 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria */
+/* Moldura da galeria — sem fundo escuro */
 .pf-gallery-wrap {
   cursor: zoom-in;
+  background: transparent !important;
   overflow: hidden;
 }
 
-/* Track — coluna de imagens, movida via JS */
-.pf-gallery-track {
-  display: flex;
-  flex-direction: column;
-  will-change: transform;
-}
-
-/* Cada imagem ocupa 100% da largura */
-.pf-gallery-img {
+/* Cada imagem ocupa 100% do frame, empilhada */
+.pf-fade-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  display: block;
-  flex-shrink: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  transition: opacity .9s ease;
   pointer-events: none;
   user-select: none;
+  display: block;
 }
+.pf-fade-img.pf-fade-active { opacity: 1; }
 
 /* Overlay de hint visível no hover */
 .pf-gallery-hint {
   position: absolute; inset: 0; z-index: 5;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: .5rem;
-  background: rgba(0,0,0,.42);
+  background: rgba(0,0,0,.38);
   backdrop-filter: blur(2px);
   color: #fff; font-size: .7rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase;

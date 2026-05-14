@@ -329,76 +329,35 @@ document.querySelectorAll('.pf-video').forEach(video => {
   video.addEventListener('click', () => { if (!video.paused) stopPlay(); });
 });
 
-/* ── Design Gallery — scroll vertical + lightbox ── */
+/* ── Design Gallery — crossfade a cada 2.5s + lightbox ── */
 (function () {
-  const gallery  = document.getElementById('pf-design-gallery');
-  const track    = document.getElementById('pf-gallery-track');
-  if (!gallery || !track) return;
+  const gallery = document.getElementById('pf-design-gallery');
+  if (!gallery) return;
 
-  const SPEED  = 0.45;   // px por frame (≈27 px/s a 60fps)
-  const IMAGES = 17;     // total de imagens únicas
-  let scrollY  = 0;
-  let paused   = false;
-  let halfH    = 0;      // altura total das 17 imagens originais
+  const imgs    = Array.from(gallery.querySelectorAll('.pf-fade-img'));
+  if (!imgs.length) return;
 
-  /* Calcula a altura das 17 imagens originais */
-  function calcHalfH() {
-    const imgs = track.querySelectorAll('.pf-gallery-img');
-    let h = 0;
-    for (let i = 0; i < IMAGES; i++) h += imgs[i].offsetHeight;
-    return h;
+  let current = 0;
+  let paused  = false;
+
+  /* Avança para a próxima imagem com crossfade */
+  function next() {
+    if (paused) return;
+    imgs[current].classList.remove('pf-fade-active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('pf-fade-active');
   }
 
-  /* Ajusta cada imagem para preencher exatamente a altura do gadget */
-  function fitImages() {
-    const h = gallery.offsetHeight;
-    if (!h) return;
-    track.querySelectorAll('.pf-gallery-img').forEach(im => {
-      im.style.height     = h + 'px';
-      im.style.objectFit  = 'cover';
-      im.style.objectPosition = 'center center';
-    });
-    halfH = 0; // força recalcular
-  }
-  fitImages();
-  window.addEventListener('resize', fitImages, { passive: true });
+  /* Intervalo de 2.5 segundos (900ms fade + 1600ms visível) */
+  setInterval(next, 2500);
 
-  /* Loop de animação */
-  function tick() {
-    if (!paused) {
-      if (!halfH) halfH = calcHalfH();
-      if (halfH > 0) {
-        scrollY += SPEED;
-        if (scrollY >= halfH) scrollY -= halfH;
-        track.style.transform = 'translateY(-' + scrollY + 'px)';
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
-  /* Pausa no hover */
+  /* Pausa ao passar o mouse */
   gallery.addEventListener('mouseenter', () => { paused = true; });
   gallery.addEventListener('mouseleave', () => { paused = false; });
 
-  /* Clique → detecta imagem visível no centro → abre lightbox */
+  /* Clique → abre lightbox na imagem que está visível agora */
   gallery.addEventListener('click', () => {
-    if (!halfH) halfH = calcHalfH();
-    const imgs      = track.querySelectorAll('.pf-gallery-img');
-    const galleryH  = gallery.offsetHeight;
-    const centerY   = scrollY + galleryH / 2;  // Y do centro da janela
-
-    /* Encontra qual imagem cobre o centro */
-    let accY = 0;
-    let idx  = 0;
-    for (let i = 0; i < IMAGES; i++) {
-      const h = imgs[i].offsetHeight;
-      if (centerY >= accY && centerY < accY + h) { idx = i; break; }
-      accY += h;
-    }
-
-    /* Dispara click na âncora oculta correspondente */
     const anchors = gallery.parentElement.querySelectorAll('.pf-lb-anchors .portfolio-clickable');
-    if (anchors[idx]) anchors[idx].click();
+    if (anchors[current]) anchors[current].click();
   });
 }());
