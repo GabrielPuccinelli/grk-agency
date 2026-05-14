@@ -631,13 +631,21 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* ── Container do vídeo — sem moldura, mesmo tamanho da galeria ── */
+/* Linha de vídeo: estica as colunas para a mesma altura do texto */
+.pf-row-video {
+  align-items: stretch;
+}
+.pf-row-video .pf-col-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Container do vídeo — sem moldura, altura igual ao texto ── */
 .pf-video-box {
   position: relative;
   width: 100%;
-  max-width: 65%;
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   overflow: hidden;
   background: transparent;
 }
