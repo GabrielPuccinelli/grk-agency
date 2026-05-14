@@ -571,6 +571,14 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   }
   .pf-row-reverse .pf-col-text,
   .pf-row-reverse .pf-col-media { order: unset; }
+
+  /* Vídeo no mobile: width fixo, height via aspect-ratio */
+  .pf-row-video { align-items: unset; }
+  .pf-video-box {
+    height: auto !important;
+    width: 55% !important;
+    margin: 0 auto;
+  }
 }
 
 /* ── Design Gallery (crossfade) ── */
