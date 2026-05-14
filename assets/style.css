@@ -587,6 +587,8 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box {
   position: relative;
   width: 100%;
+  max-width: 82%;
+  margin: 0 auto;
   aspect-ratio: 3153 / 3573;
   border-radius: 1.5rem;
   overflow: hidden;
