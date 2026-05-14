@@ -608,7 +608,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 /* Sizer não é mais necessário (aspect-ratio fixo), mas mantido oculto */
 .pf-fade-sizer { display: none; }
 
-/* Imagens de crossfade — preenchem o frame exato */
+/* Imagens de crossfade — zoom 1.7x corta o fundo escuro do mockup */
 .pf-fade-img {
   position: absolute;
   inset: 0;
@@ -616,6 +616,8 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  transform: scale(1.7);
+  transform-origin: center center;
   opacity: 0;
   transition: opacity .9s ease;
   pointer-events: none;
