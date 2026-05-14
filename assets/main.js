@@ -83,18 +83,23 @@ filterBtns.forEach(btn => {
     const filter = btn.dataset.filter;
     portfolioItems.forEach(item => {
       const show = filter === 'all' || item.dataset.category === filter;
+
+      // Fade out first
+      item.style.transition = 'opacity .2s, transform .2s';
       item.style.opacity = '0';
-      item.style.transform = 'scale(0.95)';
+      item.style.transform = 'translateY(10px)';
+
       setTimeout(() => {
-        item.style.display = show ? 'block' : 'none';
+        // showcase items are flex rows — use flex, not block
+        item.style.display = show ? 'flex' : 'none';
         if (show) {
           requestAnimationFrame(() => {
-            item.style.transition = 'opacity .3s, transform .3s';
+            item.style.transition = 'opacity .35s, transform .35s';
             item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
+            item.style.transform = 'translateY(0)';
           });
         }
-      }, 150);
+      }, 200);
     });
   });
 });

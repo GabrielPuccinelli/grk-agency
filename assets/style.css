@@ -406,6 +406,151 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   width: fit-content;
 }
 
+/* ══════════════════════════════════════════
+   PORTFOLIO — LAYOUT EDITORIAL ALTERNADO
+══════════════════════════════════════════ */
+
+/* Container: coluna única */
+#portfolio-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada item: linha com dois blocos */
+.pf-showcase-item {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: relative;
+}
+.pf-showcase-item:last-child { border-bottom: none; padding-bottom: 1rem; }
+
+/* Direções alternadas */
+.pf-side-right { flex-direction: row; }          /* texto L · moldura R */
+.pf-side-left  { flex-direction: row-reverse; }  /* moldura L · texto R */
+
+/* ── Bloco de texto ── */
+.pf-showcase-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.pf-showcase-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.pf-showcase-desc {
+  color: #9ca3af;
+  font-size: .9875rem;
+  line-height: 1.8;
+  max-width: 460px;
+}
+
+.pf-features-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: .55rem;
+}
+.pf-features-list li {
+  color: #d1d5db; font-size: .875rem;
+  padding-left: 1.5rem; position: relative;
+}
+.pf-features-list li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--gold); font-size: .75rem; top: .1rem;
+}
+
+/* ── Moldura ── */
+.pf-showcase-frame {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.pf-frame-inner {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  border: 1px solid rgba(212,168,67,.22);
+  box-shadow:
+    0 0 0 5px rgba(212,168,67,.05),
+    0 28px 70px rgba(0,0,0,.65),
+    inset 0 1px 0 rgba(255,255,255,.07);
+  background: #080808;
+}
+
+/* Gradiente dourado sutil na borda superior da moldura */
+.pf-frame-inner::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,168,67,.5), transparent);
+  z-index: 2; pointer-events: none;
+}
+
+.pf-frame-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+
+/* Hover overlay para imagem clicável */
+.pf-frame-hover {
+  position: absolute; inset: 0; z-index: 3;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(2px);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .5rem;
+  color: #fff; font-size: .75rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  opacity: 0; transition: opacity .3s;
+}
+.portfolio-clickable:hover .pf-frame-hover { opacity: 1; }
+.pf-frame-hover svg { color: var(--gold); }
+
+/* Placeholder frames (sem imagem real) */
+.pf-frame-placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: .75rem;
+}
+.pf-placeholder-icon { color: rgba(212,168,67,.28); }
+.pf-placeholder-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(212,168,67,.4);
+}
+
+/* Separador decorativo dourado entre itens */
+.pf-showcase-item + .pf-showcase-item::before {
+  content: '';
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,168,67,.35), transparent);
+}
+
+/* Mobile: empilha tudo em coluna */
+@media (max-width: 768px) {
+  .pf-showcase-item,
+  .pf-side-right,
+  .pf-side-left {
+    flex-direction: column !important;
+    gap: 2rem !important;
+    padding: 3rem 0 !important;
+  }
+  .pf-showcase-frame { flex: none !important; max-width: 100% !important; width: 100%; }
+  .pf-showcase-desc  { max-width: 100%; }
+  .pf-showcase-title { font-size: 1.5rem !important; }
+}
+
 /* ── Portfolio Video Player ── */
 .pf-play-overlay {
   position: absolute; inset: 0; z-index: 3;
