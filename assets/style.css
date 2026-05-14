@@ -946,35 +946,72 @@ select.form-input option { background: var(--dark-3); }
 ══════════════════════════════════════════ */
 
 @media (max-width: 640px) {
-  #navbar .h-20 { height: 4rem; }
+  /* Navbar */
+  #navbar .h-20 { height: 3.75rem; }
+  #menu-toggle {
+    background: rgba(212,168,67,.12);
+    border: 1px solid rgba(212,168,67,.25);
+    border-radius: .5rem;
+    padding: .35rem .5rem;
+  }
+
+  /* Hero */
   #inicio { min-height: 100svh; }
-  #inicio > div { padding-top: 6rem !important; padding-bottom: 3rem !important; }
-  #inicio h1 { font-size: 2.4rem !important; line-height: 1.15; }
-  #inicio p  { font-size: 1rem !important; }
-  #inicio .inline-flex.rounded-full { font-size: .7rem; padding: .3rem .75rem; white-space: normal; text-align: center; }
-  #inicio .flex.flex-wrap.gap-4 a { width: 100%; justify-content: center; padding: .875rem 1rem !important; font-size: .9rem !important; }
-  #inicio .flex.flex-wrap.gap-8.mt-14 { gap: 1.25rem; margin-top: 2rem !important; }
-  #inicio .counter { font-size: 1.75rem !important; }
-  .animate-float { display: none !important; }
+  #inicio > div {
+    padding-top: 5.5rem !important;
+    padding-bottom: 2.5rem !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  #inicio h1 { font-size: 2.2rem !important; line-height: 1.15; }
+  #inicio p  { font-size: .9375rem !important; }
+  #inicio .inline-flex.rounded-full { font-size: .68rem; padding: .3rem .65rem; }
+  #inicio .flex.flex-wrap.gap-3 a,
+  #inicio .flex.flex-wrap.gap-4 a { width: 100%; justify-content: center; padding: .8rem 1rem !important; font-size: .9rem !important; }
+
+  /* Hero image — menor no mobile */
+  #inicio img.drop-shadow-2xl { max-width: 220px !important; }
+
+  /* Seções */
   .py-28 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
   .py-24 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
   .py-20 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
   .section-title { font-size: 1.75rem !important; }
-  .section-sub   { font-size: .9375rem !important; }
-  .grid.lg\:grid-cols-2, .grid.md\:grid-cols-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .section-sub   { font-size: .9rem !important; }
+  .mb-20 { margin-bottom: 2.5rem !important; }
+
+  /* Grids */
+  .grid.lg\:grid-cols-2,
+  .grid.md\:grid-cols-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
   .grid.md\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: 1fr !important; }
-  #portfolio-grid { grid-template-columns: 1fr !important; }
   .grid.md\:grid-cols-2.lg\:grid-cols-4 { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
   .grid.md\:grid-cols-3 { grid-template-columns: 1fr !important; }
+  #portfolio-grid { grid-template-columns: 1fr !important; }
+
+  /* About */
   .about-card-main { padding: 1rem !important; }
   .about-card-main .col-span-2 { height: 9rem !important; }
+  .gap-20 { gap: 2rem !important; }
+
+  /* Portfolio pf-row */
+  .pf-video-box  { height: auto !important; width: 80% !important; margin: 0 auto; }
+  .pf-gallery-box { max-width: 80% !important; }
+
+  /* CTA */
   .cta-banner { padding: 2.5rem 1.25rem !important; border-radius: 1.25rem !important; }
   .cta-banner h2 { font-size: 1.75rem !important; }
   .cta-banner .flex.flex-wrap { flex-direction: column; }
   .cta-banner .flex.flex-wrap a { width: 100%; justify-content: center; }
+
+  /* Contato */
   .contact-info-card { padding: 1rem !important; }
+  .grid.lg\:grid-cols-2.gap-16 { gap: 2rem !important; }
+
+  /* Parceiros */
   .partners-frame { border-radius: 1rem !important; }
   .partners-img   { height: 70px !important; }
+
+  /* Utilitários */
   .whatsapp-float { width: 50px; height: 50px; bottom: 1.25rem; right: 1.25rem; }
   .whatsapp-float svg { width: 1.4rem; height: 1.4rem; }
   .lb-nav   { width: 38px; height: 38px; }
@@ -985,11 +1022,13 @@ select.form-input option { background: var(--dark-3); }
 
 @media (min-width: 641px) and (max-width: 768px) {
   #inicio h1 { font-size: 3rem !important; }
-  .animate-float { display: none !important; }
+  #inicio > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  #inicio img.drop-shadow-2xl { max-width: 280px !important; }
   .grid.lg\:grid-cols-2 { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
   .grid.md\:grid-cols-2.lg\:grid-cols-3 { grid-template-columns: 1fr 1fr !important; }
   .grid.md\:grid-cols-3 { grid-template-columns: 1fr 1fr !important; }
   .section-title { font-size: 2rem !important; }
+  .gap-20 { gap: 2.5rem !important; }
 }
 
 html, body { max-width: 100%; overflow-x: hidden; }
