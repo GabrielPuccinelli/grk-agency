@@ -340,16 +340,19 @@ document.querySelectorAll('.pf-video').forEach(video => {
   let current = 0;
   let paused  = false;
 
-  /* Ajusta a moldura ao aspect-ratio real da imagem */
-  function applyAspectRatio() {
-    const w = imgs[0].naturalWidth;
-    const h = imgs[0].naturalHeight;
-    if (w && h) gallery.style.aspectRatio = (w / h).toFixed(4);
+  /* Ajusta a moldura ao tamanho real da imagem */
+  function applySize() {
+    const nw = imgs[0].naturalWidth;
+    const nh = imgs[0].naturalHeight;
+    if (!nw || !nh) return;
+    // Define a proporção exata da imagem via inline style (sobrescreve o 16/10 do .pf-moldura)
+    gallery.style.aspectRatio = nw + ' / ' + nh;
+    gallery.style.height = '';   // deixa o aspect-ratio controlar
   }
   if (imgs[0].complete && imgs[0].naturalWidth) {
-    applyAspectRatio();
+    applySize();
   } else {
-    imgs[0].addEventListener('load', applyAspectRatio);
+    imgs[0].addEventListener('load', applySize);
   }
 
   /* Avança para a próxima imagem com crossfade */

@@ -588,7 +588,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   cursor: zoom-in;
   background: transparent !important;
   overflow: hidden;
-  aspect-ratio: unset !important;  /* sobrescreve o 16/10 do .pf-moldura */
+  /* aspect-ratio é sobrescrito via inline style pelo JS */
 }
 
 /* Cada imagem ocupa 100% do frame, empilhada */
