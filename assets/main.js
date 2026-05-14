@@ -280,29 +280,87 @@ sections.forEach(s => sectionObserver.observe(s));
 })();
 
 /* ── Portfolio Video Players ── */
-document.querySelectorAll('.portfolio-img').forEach(wrap => {
-  const video   = wrap.querySelector('.pf-video');
-  if (!video) return;
-
-  const overlay   = wrap.querySelector('.pf-play-overlay');
-  const playBtn   = wrap.querySelector('.pf-play-btn');
-  const pauseBtn  = wrap.querySelector('.pf-pause-btn');
+document.querySelectorAll('.pf-video').forEach(video => {
+  const moldura  = video.closest('.pf-moldura');
+  if (!moldura) return;
+  const overlay  = moldura.querySelector('.pf-play-overlay');
+  const playBtn  = moldura.querySelector('.pf-play-btn');
+  const pauseBtn = moldura.querySelector('.pf-pause-btn');
+  if (!overlay || !playBtn || !pauseBtn) return;
 
   function startPlay() {
     overlay.style.display  = 'none';
     pauseBtn.style.display = 'flex';
     video.play();
   }
-
   function stopPlay() {
     video.pause();
     overlay.style.display  = 'flex';
     pauseBtn.style.display = 'none';
   }
 
-  playBtn.addEventListener('click', (e) => { e.stopPropagation(); startPlay(); });
+  playBtn.addEventListener('click',  (e) => { e.stopPropagation(); startPlay(); });
   pauseBtn.addEventListener('click', (e) => { e.stopPropagation(); stopPlay(); });
   video.addEventListener('ended', stopPlay);
-  // Clicking directly on the video while playing also pauses
   video.addEventListener('click', () => { if (!video.paused) stopPlay(); });
 });
+
+/* ── Design Gallery — scroll vertical + lightbox ── */
+(function () {
+  const gallery  = document.getElementById('pf-design-gallery');
+  const track    = document.getElementById('pf-gallery-track');
+  if (!gallery || !track) return;
+
+  const SPEED  = 0.45;   // px por frame (≈27 px/s a 60fps)
+  const IMAGES = 17;     // total de imagens únicas
+  let scrollY  = 0;
+  let paused   = false;
+  let halfH    = 0;      // altura total das 17 imagens originais
+
+  /* Calcula a altura das 17 imagens originais */
+  function calcHalfH() {
+    const imgs = track.querySelectorAll('.pf-gallery-img');
+    let h = 0;
+    for (let i = 0; i < IMAGES; i++) h += imgs[i].offsetHeight;
+    return h;
+  }
+
+  /* Loop de animação */
+  function tick() {
+    if (!paused) {
+      if (!halfH) halfH = calcHalfH();
+      if (halfH > 0) {
+        scrollY += SPEED;
+        if (scrollY >= halfH) scrollY -= halfH;
+        track.style.transform = 'translateY(-' + scrollY + 'px)';
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  /* Pausa no hover */
+  gallery.addEventListener('mouseenter', () => { paused = true; });
+  gallery.addEventListener('mouseleave', () => { paused = false; });
+
+  /* Clique → detecta imagem visível no centro → abre lightbox */
+  gallery.addEventListener('click', () => {
+    if (!halfH) halfH = calcHalfH();
+    const imgs      = track.querySelectorAll('.pf-gallery-img');
+    const galleryH  = gallery.offsetHeight;
+    const centerY   = scrollY + galleryH / 2;  // Y do centro da janela
+
+    /* Encontra qual imagem cobre o centro */
+    let accY = 0;
+    let idx  = 0;
+    for (let i = 0; i < IMAGES; i++) {
+      const h = imgs[i].offsetHeight;
+      if (centerY >= accY && centerY < accY + h) { idx = i; break; }
+      accY += h;
+    }
+
+    /* Dispara click na âncora oculta correspondente */
+    const anchors = gallery.parentElement.querySelectorAll('.pf-lb-anchors .portfolio-clickable');
+    if (anchors[idx]) anchors[idx].click();
+  });
+}());

@@ -532,6 +532,60 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   .pf-row-reverse .pf-col-media { order: unset; }
 }
 
+/* ── Design Gallery (scroll vertical) ── */
+
+/* Âncoras ocultas — presentes no DOM mas invisíveis */
+.pf-lb-anchors {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden; opacity: 0;
+  pointer-events: none;
+}
+
+/* Moldura da galeria */
+.pf-gallery-wrap {
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+/* Track — coluna de imagens, movida via JS */
+.pf-gallery-track {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+/* Cada imagem ocupa 100% da largura */
+.pf-gallery-img {
+  width: 100%;
+  display: block;
+  flex-shrink: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Overlay de hint visível no hover */
+.pf-gallery-hint {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: .5rem;
+  background: rgba(0,0,0,.42);
+  backdrop-filter: blur(2px);
+  color: #fff; font-size: .7rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  opacity: 0; transition: opacity .3s;
+  pointer-events: none;
+}
+.pf-gallery-wrap:hover .pf-gallery-hint { opacity: 1; }
+.pf-gallery-hint svg { color: var(--gold); }
+
+/* ── Vídeo inteiro dentro da moldura ── */
+.pf-video-contain {
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #000;
+}
+
 /* ── Portfolio Video Player ── */
 .pf-play-overlay {
   position: absolute; inset: 0; z-index: 3;
