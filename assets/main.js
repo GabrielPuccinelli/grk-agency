@@ -141,20 +141,21 @@ sections.forEach(s => sectionObserver.observe(s));
 
 /* ── Lightbox ── */
 (function () {
-  const lb        = document.getElementById('lightbox');
-  const overlay   = document.getElementById('lb-overlay');
-  const img       = document.getElementById('lb-img');
-  const imgWrap   = img.parentElement;
-  const titleEl   = document.getElementById('lb-title');
-  const descEl    = document.getElementById('lb-desc');
-  const tagEl     = document.getElementById('lb-tag');
-  const counter   = document.getElementById('lb-counter');
-  const btnClose  = document.getElementById('lb-close');
-  const btnPrev   = document.getElementById('lb-prev');
-  const btnNext   = document.getElementById('lb-next');
-  const btnZoom   = document.getElementById('lb-zoom');
-  const zoomIn    = document.getElementById('lb-zoom-in-icon');
-  const zoomOut   = document.getElementById('lb-zoom-out-icon');
+  const lb         = document.getElementById('lightbox');
+  const overlay    = document.getElementById('lb-overlay');
+  const img        = document.getElementById('lb-img');
+  const imgWrap    = img.parentElement;
+  const titleEl    = document.getElementById('lb-title');
+  const descEl     = document.getElementById('lb-desc');
+  const tagEl      = document.getElementById('lb-tag');
+  const counter    = document.getElementById('lb-counter');
+  const filmstrip  = document.getElementById('lb-filmstrip');
+  const btnClose   = document.getElementById('lb-close');
+  const btnPrev    = document.getElementById('lb-prev');
+  const btnNext    = document.getElementById('lb-next');
+  const btnZoom    = document.getElementById('lb-zoom');
+  const zoomIn     = document.getElementById('lb-zoom-in-icon');
+  const zoomOut    = document.getElementById('lb-zoom-out-icon');
 
   let items = [];
   let current = 0;
@@ -164,35 +165,59 @@ sections.forEach(s => sectionObserver.observe(s));
     items = Array.from(document.querySelectorAll('.portfolio-clickable'));
   }
 
+  /* Constrói a tira de thumbnails para o grupo atual */
+  function buildFilmstrip() {
+    filmstrip.innerHTML = '';
+    if (items.length <= 1) return;
+
+    items.forEach((card, i) => {
+      const src = card.dataset.lightbox;
+      if (!src) return;
+      const thumb = document.createElement('div');
+      thumb.className = 'lb-thumb' + (i === current ? ' lb-thumb-active' : '');
+      const tImg = document.createElement('img');
+      tImg.src = src;
+      tImg.alt = card.dataset.title || '';
+      tImg.loading = 'lazy';
+      thumb.appendChild(tImg);
+      thumb.addEventListener('click', (e) => { e.stopPropagation(); show(i); });
+      filmstrip.appendChild(thumb);
+    });
+  }
+
+  /* Atualiza destaque no filmstrip e rola para o thumb ativo */
+  function updateFilmstrip() {
+    const thumbs = filmstrip.querySelectorAll('.lb-thumb');
+    thumbs.forEach((t, i) => t.classList.toggle('lb-thumb-active', i === current));
+    if (thumbs[current]) {
+      thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+
   function show(index) {
     if (!items.length) return;
     current = (index + items.length) % items.length;
     const card = items[current];
-
-    // Reset zoom
     setZoom(false);
 
-    // Set content
     img.src = card.dataset.lightbox;
     img.alt = card.dataset.title || '';
     titleEl.textContent = card.dataset.title || '';
     descEl.textContent  = card.dataset.desc  || '';
     tagEl.textContent   = card.dataset.tag   || 'Portfólio';
 
-    // Counter
-    counter.textContent = items.length > 1
-      ? (current + 1) + ' / ' + items.length
-      : '';
-
-    // Arrow visibility
+    counter.textContent = items.length > 1 ? (current + 1) + ' / ' + items.length : '';
     btnPrev.style.display = items.length > 1 ? 'flex' : 'none';
     btnNext.style.display = items.length > 1 ? 'flex' : 'none';
+
+    updateFilmstrip();
   }
 
   function open(index) {
     collect();
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    buildFilmstrip();
     show(index);
   }
 
@@ -200,6 +225,7 @@ sections.forEach(s => sectionObserver.observe(s));
     lb.style.display = 'none';
     document.body.style.overflow = '';
     img.src = '';
+    filmstrip.innerHTML = '';
   }
 
   function setZoom(state) {
@@ -210,9 +236,7 @@ sections.forEach(s => sectionObserver.observe(s));
     zoomOut.classList.toggle('hidden', !zoomed);
   }
 
-  // Wire up portfolio cards
-  document.querySelectorAll('.portfolio-clickable').forEach((card, i) => {
-    card.style.cursor = 'zoom-in';
+  document.querySelectorAll('.portfolio-clickable').forEach((card) => {
     card.addEventListener('click', () => { collect(); open(items.indexOf(card)); });
   });
 
@@ -311,7 +335,7 @@ document.querySelectorAll('.pf-video').forEach(video => {
   const track    = document.getElementById('pf-gallery-track');
   if (!gallery || !track) return;
 
-  const SPEED  = 0.45;   // px por frame (≈27 px/s a 60fps)
+  const SPEED  = 0.12;   // px por frame (≈7 px/s a 60fps — velocidade lenta e legível)
   const IMAGES = 17;     // total de imagens únicas
   let scrollY  = 0;
   let paused   = false;
