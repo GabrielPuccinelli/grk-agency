@@ -335,7 +335,7 @@ document.querySelectorAll('.pf-video').forEach(video => {
   const track    = document.getElementById('pf-gallery-track');
   if (!gallery || !track) return;
 
-  const SPEED  = 0.12;   // px por frame (≈7 px/s a 60fps — velocidade lenta e legível)
+  const SPEED  = 0.45;   // px por frame (≈27 px/s a 60fps)
   const IMAGES = 17;     // total de imagens únicas
   let scrollY  = 0;
   let paused   = false;
@@ -348,6 +348,20 @@ document.querySelectorAll('.pf-video').forEach(video => {
     for (let i = 0; i < IMAGES; i++) h += imgs[i].offsetHeight;
     return h;
   }
+
+  /* Ajusta cada imagem para preencher exatamente a altura do gadget */
+  function fitImages() {
+    const h = gallery.offsetHeight;
+    if (!h) return;
+    track.querySelectorAll('.pf-gallery-img').forEach(im => {
+      im.style.height     = h + 'px';
+      im.style.objectFit  = 'cover';
+      im.style.objectPosition = 'center center';
+    });
+    halfH = 0; // força recalcular
+  }
+  fitImages();
+  window.addEventListener('resize', fitImages, { passive: true });
 
   /* Loop de animação */
   function tick() {
