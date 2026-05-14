@@ -305,7 +305,7 @@ sections.forEach(s => sectionObserver.observe(s));
 
 /* ── Portfolio Video Players ── */
 document.querySelectorAll('.pf-video').forEach(video => {
-  const moldura  = video.closest('.pf-moldura');
+  const moldura  = video.closest('.pf-moldura, .pf-video-box');
   if (!moldura) return;
   const overlay  = moldura.querySelector('.pf-play-overlay');
   const playBtn  = moldura.querySelector('.pf-play-btn');
