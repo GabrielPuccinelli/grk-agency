@@ -631,10 +631,12 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* ── Container do vídeo — sem moldura ── */
+/* ── Container do vídeo — sem moldura, mesmo tamanho da galeria ── */
 .pf-video-box {
   position: relative;
   width: 100%;
+  max-width: 65%;
+  margin: 0 auto;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: transparent;
