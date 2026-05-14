@@ -631,11 +631,20 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* ── Vídeo inteiro dentro da moldura ── */
+/* ── Container do vídeo — sem moldura ── */
+.pf-video-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* ── Vídeo inteiro dentro do container ── */
 .pf-video-contain {
   object-fit: contain !important;
   object-position: center center !important;
-  background: #000;
+  background: transparent;
 }
 
 /* ── Portfolio Video Player ── */
