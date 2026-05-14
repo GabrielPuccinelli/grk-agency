@@ -641,16 +641,18 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   justify-content: center;
 }
 
-/* ── Container do vídeo — com moldura dourada justa ── */
+/* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
 .pf-video-box {
   position: relative;
-  width: 100%;
+  /* altura preenche a coluna; largura calculada pelo aspect-ratio do vídeo */
   height: 100%;
+  width: auto;
+  aspect-ratio: 1280 / 2276;
   overflow: hidden;
   border-radius: 1rem;
   border: 1px solid rgba(212,168,67,.35);
   box-shadow: 0 16px 48px rgba(0,0,0,.55);
-  background: #000;
+  background: transparent; /* sem fundo preto */
 }
 .pf-video-box::before {
   content: '';
@@ -659,9 +661,9 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   z-index: 3; pointer-events: none;
 }
 
-/* ── Vídeo inteiro dentro do container ── */
+/* ── Vídeo preenche o frame exato sem borda preta ── */
 .pf-video-contain {
-  object-fit: contain !important;
+  object-fit: cover !important;
   object-position: center center !important;
   background: transparent;
 }
