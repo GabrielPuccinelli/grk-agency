@@ -583,17 +583,14 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria de design — aspect-ratio exato das imagens (3153×3573) */
+/* Galeria de design — sem moldura, só a imagem */
 .pf-gallery-box {
   position: relative;
   width: 100%;
   max-width: 65%;
   margin: 0 auto;
   aspect-ratio: 3153 / 3573;
-  border-radius: 0.75rem;
   overflow: hidden;
-  border: 1px solid rgba(212,168,67,.3);
-  box-shadow: 0 16px 48px rgba(0,0,0,.6);
   background: transparent;
   cursor: zoom-in;
 }
