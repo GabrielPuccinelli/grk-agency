@@ -583,12 +583,25 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria */
-.pf-gallery-wrap {
-  cursor: zoom-in;
-  background: transparent !important;
+/* Moldura da galeria de design — sem aspect-ratio, altura definida pelo sizer */
+.pf-gallery-box {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5rem;
   overflow: hidden;
-  aspect-ratio: auto;   /* cancela o 16/10 do .pf-moldura — altura definida pelo sizer */
+  border: 1px solid rgba(212,168,67,.22);
+  box-shadow:
+    0 0 0 5px rgba(212,168,67,.05),
+    0 24px 64px rgba(0,0,0,.65),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  background: transparent;
+  cursor: zoom-in;
+}
+.pf-gallery-box::before {
+  content: '';
+  position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,168,67,.45), transparent);
+  z-index: 3; pointer-events: none;
 }
 
 /* Imagem "sizer": ocupa espaço normalmente (não absoluta), fica invisível.
@@ -630,7 +643,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   opacity: 0; transition: opacity .3s;
   pointer-events: none;
 }
-.pf-gallery-wrap:hover .pf-gallery-hint { opacity: 1; }
+.pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
 /* ── Vídeo inteiro dentro da moldura ── */
