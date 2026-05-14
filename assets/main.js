@@ -340,21 +340,6 @@ document.querySelectorAll('.pf-video').forEach(video => {
   let current = 0;
   let paused  = false;
 
-  /* Ajusta a moldura ao tamanho real da imagem */
-  function applySize() {
-    const nw = imgs[0].naturalWidth;
-    const nh = imgs[0].naturalHeight;
-    if (!nw || !nh) return;
-    // Define a proporção exata da imagem via inline style (sobrescreve o 16/10 do .pf-moldura)
-    gallery.style.aspectRatio = nw + ' / ' + nh;
-    gallery.style.height = '';   // deixa o aspect-ratio controlar
-  }
-  if (imgs[0].complete && imgs[0].naturalWidth) {
-    applySize();
-  } else {
-    imgs[0].addEventListener('load', applySize);
-  }
-
   /* Avança para a próxima imagem com crossfade */
   function next() {
     if (paused) return;
@@ -363,8 +348,8 @@ document.querySelectorAll('.pf-video').forEach(video => {
     imgs[current].classList.add('pf-fade-active');
   }
 
-  /* Intervalo de 2.5 segundos (900ms fade + 1600ms visível) */
-  setInterval(next, 2500);
+  /* Intervalo de 3.5 segundos */
+  setInterval(next, 3500);
 
   /* Pausa ao passar o mouse */
   gallery.addEventListener('mouseenter', () => { paused = true; });

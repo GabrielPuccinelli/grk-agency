@@ -583,15 +583,26 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria — aspect-ratio definido via JS pelo tamanho real da imagem */
+/* Moldura da galeria */
 .pf-gallery-wrap {
   cursor: zoom-in;
   background: transparent !important;
   overflow: hidden;
-  /* aspect-ratio é sobrescrito via inline style pelo JS */
+  aspect-ratio: auto;   /* cancela o 16/10 do .pf-moldura — altura definida pelo sizer */
 }
 
-/* Cada imagem ocupa 100% do frame, empilhada */
+/* Imagem "sizer": ocupa espaço normalmente (não absoluta), fica invisível.
+   Sua altura natural define a altura do frame sem JS. */
+.pf-fade-sizer {
+  display: block;
+  width: 100%;
+  height: auto;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Imagens de crossfade: empilhadas sobre o sizer */
 .pf-fade-img {
   position: absolute;
   inset: 0;
