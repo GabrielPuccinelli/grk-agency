@@ -583,11 +583,12 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Moldura da galeria — sem fundo escuro */
+/* Moldura da galeria — aspect-ratio definido via JS pelo tamanho real da imagem */
 .pf-gallery-wrap {
   cursor: zoom-in;
   background: transparent !important;
   overflow: hidden;
+  aspect-ratio: unset !important;  /* sobrescreve o 16/10 do .pf-moldura */
 }
 
 /* Cada imagem ocupa 100% do frame, empilhada */

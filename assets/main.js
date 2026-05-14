@@ -340,6 +340,18 @@ document.querySelectorAll('.pf-video').forEach(video => {
   let current = 0;
   let paused  = false;
 
+  /* Ajusta a moldura ao aspect-ratio real da imagem */
+  function applyAspectRatio() {
+    const w = imgs[0].naturalWidth;
+    const h = imgs[0].naturalHeight;
+    if (w && h) gallery.style.aspectRatio = (w / h).toFixed(4);
+  }
+  if (imgs[0].complete && imgs[0].naturalWidth) {
+    applyAspectRatio();
+  } else {
+    imgs[0].addEventListener('load', applyAspectRatio);
+  }
+
   /* Avança para a próxima imagem com crossfade */
   function next() {
     if (paused) return;
