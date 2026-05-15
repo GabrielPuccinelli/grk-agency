@@ -337,8 +337,8 @@
       <!-- ── Portfolio Showcase ── -->
       <div id="portfolio-grid">
 
-        <!-- ① DESIGN: texto | moldura -->
-        <div class="portfolio-item pf-row" data-category="design" data-aos="fade-up">
+        <!-- ① DESIGN: moldura | texto (imagem esquerda, texto direita) -->
+        <div class="portfolio-item pf-row pf-row-reverse" data-category="design" data-aos="fade-up">
           <div class="pf-col-text">
             <span class="label-tag">Design Gráfico</span>
             <h3 class="pf-title">Design que Posiciona<br>sua Marca no Digital</h3>
@@ -421,49 +421,25 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <div class="pf-video-box">
-              <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
-                <source src="assets/video/LYX-web.mp4" type="video/mp4" />
-              </video>
-              <div class="pf-play-overlay">
-                <button class="pf-play-btn" aria-label="Reproduzir vídeo LYX">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <div class="mockup-phone-wrap">
+              <div class="mockup-phone-screen pf-video-box">
+                <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
+                  <source src="assets/video/LYX-web.mp4" type="video/mp4" />
+                </video>
+                <div class="pf-play-overlay">
+                  <button class="pf-play-btn" aria-label="Reproduzir vídeo LYX">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  </button>
+                </div>
+                <button class="pf-pause-btn" aria-label="Pausar vídeo" style="display:none;">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 </button>
               </div>
-              <button class="pf-pause-btn" aria-label="Pausar vídeo" style="display:none;">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-              </button>
             </div>
           </div>
         </div>
 
-        <!-- ③ SOCIAL MEDIA: texto | moldura -->
-        <div class="portfolio-item pf-row" data-category="social" data-aos="fade-up">
-          <div class="pf-col-text">
-            <span class="label-tag">Social Media</span>
-            <h3 class="pf-title">Gestão de Redes Sociais<br>com Estratégia e Resultado</h3>
-            <p class="pf-desc">Planejamento, criação de conteúdo e gestão completa das suas redes sociais. Construímos presença digital consistente que gera engajamento real, amplia alcance e transforma seguidores em clientes.</p>
-            <ul class="pf-list">
-              <li>Planejamento de Conteúdo</li>
-              <li>Criação de Posts &amp; Stories</li>
-              <li>Gestão de Comunidade</li>
-              <li>Relatórios de Performance</li>
-            </ul>
-            <a href="#contato" class="btn-primary">Quero um projeto
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-          </div>
-          <div class="pf-col-media">
-            <div class="pf-moldura" style="background:linear-gradient(135deg,rgba(212,168,67,.08),rgba(8,8,8,.95));">
-              <div class="pf-placeholder-inner">
-                <svg class="w-20 h-20" style="color:rgba(212,168,67,.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-                <span class="pf-placeholder-label">Social Media</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ④ SITE: moldura | texto (invertido) -->
+        <!-- ③ SITE: moldura | texto (invertido) -->
         <div class="portfolio-item pf-row pf-row-reverse" data-category="web" data-aos="fade-up">
           <div class="pf-col-text">
             <span class="label-tag">Site &amp; Landing Page</span>
@@ -480,11 +456,25 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <div class="pf-moldura" style="background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(8,8,8,.95));">
-              <div class="pf-placeholder-inner">
-                <svg class="w-20 h-20" style="color:rgba(59,130,246,.3);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                <span class="pf-placeholder-label">Sites &amp; Landing Pages</span>
+            <div class="mockup-laptop-wrap">
+              <div class="mockup-laptop-lid">
+                <div class="mockup-laptop-screen">
+                  <!-- Mini browser preview -->
+                  <div class="msc-browser-bar">
+                    <div class="msc-dots"><span></span><span></span><span></span></div>
+                    <div class="msc-url-bar">grkproject.com.br</div>
+                  </div>
+                  <div class="msc-site-body">
+                    <div class="msc-nav-row"><span class="msc-nav-logo">GRK</span><div class="msc-nav-links"><span></span><span></span><span></span><span></span></div></div>
+                    <div class="msc-hero-row">
+                      <div class="msc-hero-text"><div class="msc-line msc-line-lg"></div><div class="msc-line msc-line-md"></div><div class="msc-line msc-line-sm"></div><div class="msc-cta-btn"></div></div>
+                      <div class="msc-hero-img"></div>
+                    </div>
+                    <div class="msc-cards-row"><div class="msc-card"></div><div class="msc-card"></div><div class="msc-card"></div></div>
+                  </div>
+                </div>
               </div>
+              <div class="mockup-laptop-base"><div class="mockup-laptop-notch"></div></div>
             </div>
           </div>
         </div>
