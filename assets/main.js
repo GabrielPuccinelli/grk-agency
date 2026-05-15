@@ -315,6 +315,8 @@ document.querySelectorAll('.pf-video').forEach(video => {
   function startPlay() {
     overlay.style.display  = 'none';
     pauseBtn.style.display = 'flex';
+    video.muted  = false;
+    video.volume = 1;
     video.play();
   }
   function stopPlay() {
