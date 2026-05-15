@@ -732,13 +732,8 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   max-width: 270px;
   /* Proporção real do PNG: 438×642 */
   aspect-ratio: 438 / 642;
-  /* Borda dourada sutil para dar forma visível na página escura */
-  border: 1px solid rgba(212,168,67,.25);
-  border-radius: 36px;
-  box-shadow:
-    0 0 0 4px rgba(0,0,0,.8),
-    0 20px 60px rgba(0,0,0,.8),
-    0 0 40px rgba(212,168,67,.06);
+  /* O PNG já é o quadro visual — sem border/shadow extras */
+  box-shadow: 0 24px 64px rgba(0,0,0,.7);
 }
 
 /* PNG do celular: fica ATRÁS do vídeo */
@@ -756,9 +751,9 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
     ~1.5% laterais, ~16% de baixo) */
 .mockup-frame-phone .mockup-screen-area {
   position: absolute;
-  top: 11.5%; left: 1.5%; right: 1.5%; bottom: 15.5%;
+  top: 11%; left: 2%; right: 2%; bottom: 14%;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 32px;
   background: #000;
   z-index: 2;
   /* Cancela propriedades fixas do pf-video-box */
@@ -767,6 +762,16 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   aspect-ratio: auto !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+/* Vídeo preenche 100% da tela do celular */
+.mockup-frame-phone .pf-video {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
 }
 
 /* ── MACBOOK ── */
