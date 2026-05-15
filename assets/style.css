@@ -741,24 +741,29 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 */
 .mockup-frame-phone {
   width: 100%;
-  max-width: 300px;
+  max-width: 340px;
   /* Proporção real do PNG */
   aspect-ratio: 438 / 642;
-  /* Sem background nem overflow: o PNG define os contornos */
+  /* overflow:hidden evita que o vídeo vaze fora do frame */
+  overflow: hidden;
+  border-radius: 44px;
   box-shadow:
     0 32px 80px rgba(0,0,0,.85),
     0 0 60px rgba(212,168,67,.06);
 }
 
-/* Vídeo posicionado na região do CORPO do celular no PNG:
-   bezel lateral = 93px de cada lado → 93/438 = 21.2% ≈ 21%
-   topo do corpo ≈ 7%  |  base do corpo ≈ 8%                */
+/* Vídeo alinhado à área TRANSPARENTE do PNG (medida pixel a pixel):
+   canvas getImageData 438×642 revelou:
+   • topo do corpo (x=100): y=80  → top  = 80/642  = 12.5% → 12%
+   • base do corpo (x=100): y=526 → bottom= (642-526)/642 = 18%
+   • bezel lateral: x=93-108     → left/right = 21%
+   overflow:hidden + border-radius no frame corta qualquer sangramento */
 .mockup-frame-phone .mockup-screen-area {
   position: absolute;
   left: 21%; right: 21%;
-  top: 7%;   bottom: 8%;
+  top: 12%;  bottom: 18%;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 26px;
   background: #000;
   z-index: 2;
   /* Cancela propriedades fixas do pf-video-box */
