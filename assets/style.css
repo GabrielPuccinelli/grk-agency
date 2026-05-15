@@ -752,13 +752,13 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 
 /* Vídeo: fica NA FRENTE, dentro da área da tela
-   (baseado em análise de pixels: tela começa em ~12% do topo,
-    2% laterais, 16.5% de baixo) */
+   (baseado em análise de pixels: tela começa em ~11.5% do topo,
+    ~1.5% laterais, ~16% de baixo) */
 .mockup-frame-phone .mockup-screen-area {
   position: absolute;
-  top: 12%; left: 2%; right: 2%; bottom: 16.5%;
+  top: 11.5%; left: 1.5%; right: 1.5%; bottom: 15.5%;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 30px;
   background: #000;
   z-index: 2;
   /* Cancela propriedades fixas do pf-video-box */
