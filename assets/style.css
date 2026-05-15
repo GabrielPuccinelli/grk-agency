@@ -710,124 +710,90 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-pause-btn:hover { background: rgba(212,168,67,.7); color: #000; }
 .pf-pause-btn svg { width: 16px; height: 16px; }
 
-/* ── Phone Mockup ── */
-.mockup-phone-wrap {
+/* ══════════════════════════════════════════
+   PNG Mockup Overlay (smartphone + laptop)
+   ══════════════════════════════════════════ */
+
+/* Container externo — define proporção e posicionamento relativo */
+.mockup-frame {
   position: relative;
-  background: #1A1A1E;
-  border-radius: 44px;
-  padding: 54px 10px 30px;
-  border: 2px solid #2e2e2e;
-  box-shadow:
-    0 0 0 1px rgba(212,168,67,.18),
-    0 28px 72px rgba(0,0,0,.75),
-    inset 0 1px 0 rgba(255,255,255,.06);
-  width: 100%;
-  max-width: 230px;
   margin: 0 auto;
-  flex-shrink: 0;
+  /* Necessário para que o overlay png fique dentro */
+  isolation: isolate;
 }
-/* Dynamic Island notch */
-.mockup-phone-wrap::before {
-  content: '';
+
+/* Smartphone: proporção aprox. da imagem PNG (portrait) */
+.mockup-frame-phone {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 690 / 1000;
+}
+
+/* MacBook: proporção aprox. da imagem PNG (landscape) */
+.mockup-frame-laptop {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1366 / 900;
+}
+
+/* Área da tela — posicionada em % dentro do frame */
+.mockup-screen-area {
   position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 86px;
-  height: 26px;
-  background: #000;
-  border-radius: 50px;
-  z-index: 20;
-}
-/* Home indicator */
-.mockup-phone-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 4px;
-  background: rgba(255,255,255,.22);
-  border-radius: 2px;
-}
-/* Side power button */
-.mockup-phone-screen {
-  border-radius: 28px;
   overflow: hidden;
   background: #000;
-  position: relative;
-  /* Reset pf-video-box overrides that conflict */
+  z-index: 1;
+}
+
+/* Posição da tela dentro do PNG do smartphone
+   (ajuste top/left/right/bottom se não alinhar perfeitamente) */
+.mockup-frame-phone .mockup-screen-area {
+  top: 12%;
+  left: 14%;
+  right: 14%;
+  bottom: 7%;
+  border-radius: 6px;
+  /* Anula as propriedades de tamanho fixo do pf-video-box */
   height: auto !important;
-  width: 100% !important;
+  width: auto !important;
+  aspect-ratio: auto !important;
   border: none !important;
   box-shadow: none !important;
-  aspect-ratio: 1280 / 2276;
-}
-/* Gold accent line at top of screen */
-.mockup-phone-screen::before {
-  content: '';
-  position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(212,168,67,.45), transparent);
-  z-index: 3; pointer-events: none;
 }
 
-/* ── Laptop Mockup ── */
-.mockup-laptop-wrap {
-  position: relative;
+/* Posição da tela dentro do PNG do MacBook
+   (ajuste se não alinhar perfeitamente) */
+.mockup-frame-laptop .mockup-screen-area {
+  top: 4%;
+  left: 10%;
+  right: 10%;
+  bottom: 19%;
+  border-radius: 3px;
+  width: auto;
+  height: auto;
+}
+
+/* PNG sobreposto acima do conteúdo */
+.mockup-overlay-png {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.mockup-laptop-lid {
-  background: #1C1C1E;
-  border-radius: 10px 10px 0 0;
-  border: 2px solid #2e2e2e;
-  border-bottom: none;
-  padding: 10px 10px 0;
-  position: relative;
-  box-shadow: 0 0 0 1px rgba(212,168,67,.12);
-}
-/* Webcam dot */
-.mockup-laptop-lid::before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px; height: 5px;
-  background: #333;
-  border-radius: 50%;
-  border: 1px solid #222;
-}
-.mockup-laptop-screen {
-  background: #000;
-  border-radius: 4px 4px 0 0;
-  overflow: hidden;
-  aspect-ratio: 16 / 10;
-  position: relative;
-}
-.mockup-laptop-base {
-  background: linear-gradient(to bottom, #2a2a2e, #1e1e22);
-  border: 2px solid #2e2e2e;
-  border-top: 1px solid #3a3a3a;
-  border-radius: 0 0 8px 8px;
-  height: 16px;
-  position: relative;
-  box-shadow: 0 4px 16px rgba(0,0,0,.5), 0 0 0 1px rgba(212,168,67,.08);
-}
-.mockup-laptop-notch {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 34%;
-  height: 6px;
-  background: #2e2e2e;
-  border-radius: 4px 4px 0 0;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
 }
 
-/* ── Mini Site Preview inside laptop screen ── */
+/* Smartphone (fundo branco) → multiply faz branco virar transparente */
+.mockup-blend-multiply {
+  mix-blend-mode: multiply;
+}
+
+/* MacBook (fundo preto) → screen faz preto virar transparente */
+.mockup-blend-screen {
+  mix-blend-mode: screen;
+}
+
+/* ── Mini Site Preview inside MacBook screen ── */
 .msc-browser-bar {
   display: flex;
   align-items: center;
@@ -1209,8 +1175,8 @@ select.form-input option { background: var(--dark-3); }
 
   /* Portfolio pf-row */
   .pf-gallery-box { max-width: 88% !important; }
-  .mockup-phone-wrap { max-width: 160px !important; }
-  .mockup-laptop-wrap { max-width: 100% !important; }
+  .mockup-frame-phone { max-width: 160px !important; }
+  .mockup-frame-laptop { max-width: 100% !important; }
 
   /* CTA */
   .cta-banner { padding: 2.5rem 1.25rem !important; border-radius: 1.25rem !important; }

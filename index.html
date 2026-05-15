@@ -421,8 +421,9 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <div class="mockup-phone-wrap">
-              <div class="mockup-phone-screen pf-video-box">
+            <div class="mockup-frame mockup-frame-phone">
+              <!-- Vídeo posicionado na área da tela do smartphone -->
+              <div class="mockup-screen-area pf-video-box">
                 <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
                   <source src="assets/video/LYX-web.mp4" type="video/mp4" />
                 </video>
@@ -435,6 +436,8 @@
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 </button>
               </div>
+              <!-- PNG do smartphone sobreposto (branco vira transparente com multiply) -->
+              <img src="assets/mockup-phone.png" class="mockup-overlay-png mockup-blend-multiply" alt="">
             </div>
           </div>
         </div>
@@ -456,25 +459,24 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <div class="mockup-laptop-wrap">
-              <div class="mockup-laptop-lid">
-                <div class="mockup-laptop-screen">
-                  <!-- Mini browser preview -->
-                  <div class="msc-browser-bar">
-                    <div class="msc-dots"><span></span><span></span><span></span></div>
-                    <div class="msc-url-bar">grkproject.com.br</div>
+            <div class="mockup-frame mockup-frame-laptop">
+              <!-- Conteúdo posicionado na área da tela do MacBook -->
+              <div class="mockup-screen-area">
+                <div class="msc-browser-bar">
+                  <div class="msc-dots"><span></span><span></span><span></span></div>
+                  <div class="msc-url-bar">grkproject.com.br</div>
+                </div>
+                <div class="msc-site-body">
+                  <div class="msc-nav-row"><span class="msc-nav-logo">GRK</span><div class="msc-nav-links"><span></span><span></span><span></span><span></span></div></div>
+                  <div class="msc-hero-row">
+                    <div class="msc-hero-text"><div class="msc-line msc-line-lg"></div><div class="msc-line msc-line-md"></div><div class="msc-line msc-line-sm"></div><div class="msc-cta-btn"></div></div>
+                    <div class="msc-hero-img"></div>
                   </div>
-                  <div class="msc-site-body">
-                    <div class="msc-nav-row"><span class="msc-nav-logo">GRK</span><div class="msc-nav-links"><span></span><span></span><span></span><span></span></div></div>
-                    <div class="msc-hero-row">
-                      <div class="msc-hero-text"><div class="msc-line msc-line-lg"></div><div class="msc-line msc-line-md"></div><div class="msc-line msc-line-sm"></div><div class="msc-cta-btn"></div></div>
-                      <div class="msc-hero-img"></div>
-                    </div>
-                    <div class="msc-cards-row"><div class="msc-card"></div><div class="msc-card"></div><div class="msc-card"></div></div>
-                  </div>
+                  <div class="msc-cards-row"><div class="msc-card"></div><div class="msc-card"></div><div class="msc-card"></div></div>
                 </div>
               </div>
-              <div class="mockup-laptop-base"><div class="mockup-laptop-notch"></div></div>
+              <!-- PNG do MacBook sobreposto (preto vira transparente com screen) -->
+              <img src="assets/mockup-laptop.png" class="mockup-overlay-png mockup-blend-screen" alt="">
             </div>
           </div>
         </div>
