@@ -421,8 +421,10 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <!-- Phone: PNG como background-image via CSS (clip-path corta o fundo branco) -->
             <div class="mockup-frame mockup-frame-phone">
+              <!-- PNG do celular fica ATRÁS do vídeo (z-index 0) -->
+              <img src="assets/mockup-phone.png" class="mockup-behind" alt="">
+              <!-- Vídeo fica NA FRENTE (z-index 2), posicionado dentro da tela -->
               <div class="mockup-screen-area pf-video-box">
                 <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
                   <source src="assets/video/LYX-web.mp4" type="video/mp4" />

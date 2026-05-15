@@ -716,7 +716,9 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-pause-btn svg { width: 16px; height: 16px; }
 
 /* ══════════════════════════════════════════
-   PNG Mockup Frames
+   PNG Mockup Frames (phone + laptop)
+   Técnica: PNG fica atrás (z-index:0),
+   conteúdo fica na frente (z-index:2)
    ══════════════════════════════════════════ */
 
 .mockup-frame {
@@ -724,29 +726,42 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   margin: 0 auto;
 }
 
-/* ── SMARTPHONE: PNG como background-image + clip-path corta fundo branco ── */
+/* ── SMARTPHONE ── */
 .mockup-frame-phone {
   width: 100%;
   max-width: 270px;
-  aspect-ratio: 690 / 1000;
-  /* PNG como fundo — o conteúdo fica por cima */
-  background-image: url('../assets/mockup-phone.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  /* Recorta as margens brancas ao redor do celular no PNG */
-  clip-path: inset(2% 11% 2% 11% round 34px);
-  filter: drop-shadow(0 18px 48px rgba(0,0,0,.7));
+  /* Proporção real do PNG: 438×642 */
+  aspect-ratio: 438 / 642;
+  /* Borda dourada sutil para dar forma visível na página escura */
+  border: 1px solid rgba(212,168,67,.25);
+  border-radius: 36px;
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,.8),
+    0 20px 60px rgba(0,0,0,.8),
+    0 0 40px rgba(212,168,67,.06);
 }
 
-/* Vídeo posicionado dentro da tela do smartphone */
+/* PNG do celular: fica ATRÁS do vídeo */
+.mockup-frame-phone .mockup-behind {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vídeo: fica NA FRENTE, dentro da área da tela
+   (baseado em análise de pixels: tela começa em ~12% do topo,
+    2% laterais, 16.5% de baixo) */
 .mockup-frame-phone .mockup-screen-area {
   position: absolute;
-  top: 12%; left: 14%; right: 14%; bottom: 7%;
-  border-radius: 4px;
+  top: 12%; left: 2%; right: 2%; bottom: 16.5%;
   overflow: hidden;
+  border-radius: 28px;
   background: #000;
-  z-index: 1;
-  /* Cancela dimensões fixas do pf-video-box */
+  z-index: 2;
+  /* Cancela propriedades fixas do pf-video-box */
   height: auto !important;
   width: auto !important;
   aspect-ratio: auto !important;
@@ -754,17 +769,16 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   box-shadow: none !important;
 }
 
-/* ── MACBOOK: PNG fica POR BAIXO do conteúdo (não precisa de blend-mode) ── */
+/* ── MACBOOK ── */
 .mockup-frame-laptop {
   width: 100%;
   max-width: 520px;
-  aspect-ratio: 1366 / 900;
-  /* fundo preto = fundo do PNG desaparece na página escura */
-  background: transparent;
-  filter: drop-shadow(0 18px 48px rgba(0,0,0,.5));
+  /* Proporção real do PNG: 5000×3333 = 3:2 */
+  aspect-ratio: 3 / 2;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
 }
 
-/* PNG do MacBook fica atrás do conteúdo */
+/* PNG do MacBook: fica ATRÁS do conteúdo */
 .mockup-overlay-png {
   position: absolute;
   inset: 0;
@@ -774,17 +788,17 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   pointer-events: none;
 }
 
-/* Classe para PNG que fica ATRÁS (laptop) */
 .mockup-behind {
   z-index: 0;
 }
 
-/* Conteúdo dentro da tela do MacBook — fica EM CIMA do PNG */
+/* Conteúdo da tela: fica NA FRENTE do PNG
+   (proporções standard MacBook: ~7% laterais, ~4% topo, ~18% base) */
 .mockup-frame-laptop .mockup-screen-area {
   position: absolute;
-  top: 4%; left: 10%; right: 10%; bottom: 20%;
+  top: 4%; left: 7%; right: 7%; bottom: 18%;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 4px;
   background: #0e0e14;
   z-index: 2;
 }
