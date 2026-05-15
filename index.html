@@ -421,8 +421,8 @@
             </a>
           </div>
           <div class="pf-col-media">
+            <!-- Phone: PNG como background-image via CSS (clip-path corta o fundo branco) -->
             <div class="mockup-frame mockup-frame-phone">
-              <!-- Vídeo posicionado na área da tela do smartphone -->
               <div class="mockup-screen-area pf-video-box">
                 <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
                   <source src="assets/video/LYX-web.mp4" type="video/mp4" />
@@ -436,8 +436,6 @@
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 </button>
               </div>
-              <!-- PNG do smartphone sobreposto (branco vira transparente com multiply) -->
-              <img src="assets/mockup-phone.png" class="mockup-overlay-png mockup-blend-multiply" alt="">
             </div>
           </div>
         </div>
@@ -460,7 +458,9 @@
           </div>
           <div class="pf-col-media">
             <div class="mockup-frame mockup-frame-laptop">
-              <!-- Conteúdo posicionado na área da tela do MacBook -->
+              <!-- PNG do MacBook fica POR BAIXO do conteúdo (z-index 0) -->
+              <img src="assets/mockup-laptop.png" class="mockup-overlay-png mockup-behind" alt="">
+              <!-- Conteúdo fica POR CIMA do PNG (z-index 2) -->
               <div class="mockup-screen-area">
                 <div class="msc-browser-bar">
                   <div class="msc-dots"><span></span><span></span><span></span></div>
@@ -475,8 +475,6 @@
                   <div class="msc-cards-row"><div class="msc-card"></div><div class="msc-card"></div><div class="msc-card"></div></div>
                 </div>
               </div>
-              <!-- PNG do MacBook sobreposto (preto vira transparente com screen) -->
-              <img src="assets/mockup-laptop.png" class="mockup-overlay-png mockup-blend-screen" alt="">
             </div>
           </div>
         </div>

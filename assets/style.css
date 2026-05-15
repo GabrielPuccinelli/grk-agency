@@ -716,47 +716,37 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-pause-btn svg { width: 16px; height: 16px; }
 
 /* ══════════════════════════════════════════
-   PNG Mockup Overlay (smartphone + laptop)
+   PNG Mockup Frames
    ══════════════════════════════════════════ */
 
-/* Container externo — define proporção e posicionamento relativo */
 .mockup-frame {
   position: relative;
   margin: 0 auto;
-  /* SEM isolation:isolate para que mix-blend-mode funcione com o fundo da página */
 }
 
-/* Smartphone: proporção aprox. da imagem PNG (portrait) */
+/* ── SMARTPHONE: PNG como background-image + clip-path corta fundo branco ── */
 .mockup-frame-phone {
   width: 100%;
   max-width: 270px;
   aspect-ratio: 690 / 1000;
+  /* PNG como fundo — o conteúdo fica por cima */
+  background-image: url('../assets/mockup-phone.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /* Recorta as margens brancas ao redor do celular no PNG */
+  clip-path: inset(2% 11% 2% 11% round 34px);
+  filter: drop-shadow(0 18px 48px rgba(0,0,0,.7));
 }
 
-/* MacBook: proporção aprox. da imagem PNG (landscape) */
-.mockup-frame-laptop {
-  width: 100%;
-  max-width: 520px;
-  aspect-ratio: 1366 / 900;
-}
-
-/* Área da tela — posicionada em % dentro do frame */
-.mockup-screen-area {
+/* Vídeo posicionado dentro da tela do smartphone */
+.mockup-frame-phone .mockup-screen-area {
   position: absolute;
+  top: 12%; left: 14%; right: 14%; bottom: 7%;
+  border-radius: 4px;
   overflow: hidden;
   background: #000;
   z-index: 1;
-}
-
-/* Posição da tela dentro do PNG do smartphone
-   (ajuste top/left/right/bottom se não alinhar perfeitamente) */
-.mockup-frame-phone .mockup-screen-area {
-  top: 12%;
-  left: 14%;
-  right: 14%;
-  bottom: 7%;
-  border-radius: 6px;
-  /* Anula as propriedades de tamanho fixo do pf-video-box */
+  /* Cancela dimensões fixas do pf-video-box */
   height: auto !important;
   width: auto !important;
   aspect-ratio: auto !important;
@@ -764,19 +754,17 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   box-shadow: none !important;
 }
 
-/* Posição da tela dentro do PNG do MacBook
-   (ajuste se não alinhar perfeitamente) */
-.mockup-frame-laptop .mockup-screen-area {
-  top: 4%;
-  left: 10%;
-  right: 10%;
-  bottom: 19%;
-  border-radius: 3px;
-  width: auto;
-  height: auto;
+/* ── MACBOOK: PNG fica POR BAIXO do conteúdo (não precisa de blend-mode) ── */
+.mockup-frame-laptop {
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1366 / 900;
+  /* fundo preto = fundo do PNG desaparece na página escura */
+  background: transparent;
+  filter: drop-shadow(0 18px 48px rgba(0,0,0,.5));
 }
 
-/* PNG sobreposto acima do conteúdo */
+/* PNG do MacBook fica atrás do conteúdo */
 .mockup-overlay-png {
   position: absolute;
   inset: 0;
@@ -784,17 +772,21 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   height: 100%;
   object-fit: contain;
   pointer-events: none;
-  z-index: 10;
 }
 
-/* Smartphone (fundo branco) → multiply faz branco virar transparente */
-.mockup-blend-multiply {
-  mix-blend-mode: multiply;
+/* Classe para PNG que fica ATRÁS (laptop) */
+.mockup-behind {
+  z-index: 0;
 }
 
-/* MacBook (fundo preto) → screen faz preto virar transparente */
-.mockup-blend-screen {
-  mix-blend-mode: screen;
+/* Conteúdo dentro da tela do MacBook — fica EM CIMA do PNG */
+.mockup-frame-laptop .mockup-screen-area {
+  position: absolute;
+  top: 4%; left: 10%; right: 10%; bottom: 20%;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #0e0e14;
+  z-index: 2;
 }
 
 /* ── Mini Site Preview inside MacBook screen ── */
@@ -827,7 +819,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   letter-spacing: .02em;
 }
 .msc-site-body {
-  background: linear-gradient(160deg, #0B0B0B 0%, #111118 100%);
+  background: linear-gradient(160deg, #12121e 0%, #1a1a2a 100%);
   padding: 8px;
   height: calc(100% - 28px);
   display: flex;
@@ -869,10 +861,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 .msc-line {
   height: 4px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255,255,255,.4);
   border-radius: 2px;
 }
-.msc-line-lg { width: 90%; background: rgba(212,168,67,.5); }
+.msc-line-lg { width: 90%; background: rgba(212,168,67,.9); }
 .msc-line-md { width: 70%; }
 .msc-line-sm { width: 55%; }
 .msc-cta-btn {
@@ -894,10 +886,12 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .msc-card {
   flex: 1;
   height: 22px;
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
   border-radius: 4px;
 }
+.msc-browser-bar { background: #1e1e2e; }
+.msc-nav-links span { background: rgba(255,255,255,.4); }
 
 /* ── Filter Buttons ── */
 .filter-btn {
@@ -1179,7 +1173,7 @@ select.form-input option { background: var(--dark-3); }
 
   /* Portfolio pf-row */
   .pf-gallery-box { max-width: 88% !important; }
-  .mockup-frame-phone { max-width: 160px !important; }
+  .mockup-frame-phone { max-width: 200px !important; }
   .mockup-frame-laptop { max-width: 100% !important; }
 
   /* CTA */
