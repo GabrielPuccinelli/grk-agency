@@ -727,47 +727,40 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 
 /* ── SMARTPHONE ── */
+/*
+  Análise de pixels do PNG 438×642 (canvas getImageData):
+  • Fundo fora do celular  → alpha ≈ 0   (totalmente transparente)
+  • Bezel prata lateral    → RGB(214,213,218) alpha=255 — começa em x=93 e x=346
+  • Área da tela           → alpha ≈ 1   (quase transparente)
+  • Camera                 → alpha=208   (visível)
+
+  Estratégia: vídeo preenche a região do corpo do celular (left/right = 21%),
+  PNG fica POR CIMA (z-index alto) — bezel prata opaco cobre as bordas laterais,
+  tela transparente expõe o vídeo. Sem blend-mode, sem filtro — só a
+  transparência natural do PNG.
+*/
 .mockup-frame-phone {
   width: 100%;
   max-width: 300px;
+  /* Proporção real do PNG */
   aspect-ratio: 438 / 642;
-  border-radius: 40px;
-  overflow: hidden;
-  /* Corpo do celular visível contra o fundo escuro da página */
-  background: #1c1c1e;
+  /* Sem background nem overflow: o PNG define os contornos */
   box-shadow:
-    /* anel metálico interno (simula a borda de metal do smartphone) */
-    inset 0 0 0 1.5px rgba(255,255,255,.18),
-    /* borda externa sutil */
-    0 0 0 1px rgba(255,255,255,.07),
-    /* sombra de profundidade */
-    0 32px 80px rgba(0,0,0,.9),
-    /* brilho dourado ambiente */
-    0 0 60px rgba(212,168,67,.07);
+    0 32px 80px rgba(0,0,0,.85),
+    0 0 60px rgba(212,168,67,.06);
 }
 
-/* PNG do celular: textura/detalhe sobre o corpo — fica ATRÁS do vídeo */
-.mockup-frame-phone .mockup-behind {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  z-index: 1;
-  opacity: .55;   /* transparência para fundir com o background do frame */
-  mix-blend-mode: screen; /* mostra os brilhos do PNG sem escurecer o fundo */
-}
-
-/* Área da tela — vídeo edge-to-edge dentro do mockup */
+/* Vídeo posicionado na região do CORPO do celular no PNG:
+   bezel lateral = 93px de cada lado → 93/438 = 21.2% ≈ 21%
+   topo do corpo ≈ 7%  |  base do corpo ≈ 8%                */
 .mockup-frame-phone .mockup-screen-area {
   position: absolute;
-  /* Coordenadas medidas no PNG 438×642:
-     tela começa em y≈74 (11.5%), lados ≈3%, base ≈17.3% */
-  top: 11.5%; left: 3%; right: 3%; bottom: 17%;
+  left: 21%; right: 21%;
+  top: 7%;   bottom: 8%;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 30px;
   background: #000;
-  z-index: 3;
+  z-index: 2;
   /* Cancela propriedades fixas do pf-video-box */
   height: auto !important;
   width: auto !important;
@@ -776,7 +769,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   box-shadow: none !important;
 }
 
-/* Vídeo preenche 100% da tela — "borda infinita" */
+/* Vídeo edge-to-edge dentro do corpo — efeito borda infinita */
 .mockup-frame-phone .pf-video {
   position: absolute;
   inset: 0;
@@ -784,6 +777,18 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   height: 100% !important;
   object-fit: cover !important;
   object-position: center center !important;
+}
+
+/* PNG POR CIMA do vídeo — bezel prata cobre as bordas,
+   tela transparente expõe o vídeo por baixo naturalmente */
+.mockup-frame-phone .mockup-behind {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
+  /* Sem blend-mode, sem filtro — transparência nativa do PNG */
 }
 
 /* ── MACBOOK ── */
