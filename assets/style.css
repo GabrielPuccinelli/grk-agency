@@ -456,9 +456,9 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 2rem;
   align-items: center;
-  padding: 5rem 0;
+  padding: 4rem 0;
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .pf-row:last-child { border-bottom: none; }
@@ -504,7 +504,12 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 
 /* Coluna da moldura */
-.pf-col-media { width: 100%; }
+.pf-col-media {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* A moldura em si */
 .pf-moldura {
@@ -718,14 +723,13 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .mockup-frame {
   position: relative;
   margin: 0 auto;
-  /* Necessário para que o overlay png fique dentro */
-  isolation: isolate;
+  /* SEM isolation:isolate para que mix-blend-mode funcione com o fundo da página */
 }
 
 /* Smartphone: proporção aprox. da imagem PNG (portrait) */
 .mockup-frame-phone {
   width: 100%;
-  max-width: 220px;
+  max-width: 270px;
   aspect-ratio: 690 / 1000;
 }
 
