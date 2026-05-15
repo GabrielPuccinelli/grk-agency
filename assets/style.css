@@ -190,6 +190,19 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   color: #6b7280; font-size: 1.125rem;
   max-width: 600px; margin: 1rem auto 0;
   line-height: 1.7;
+  text-align: center;
+}
+/* Portfólio: texto mais longo fica em uma linha só */
+#portfolio .section-sub {
+  max-width: 900px;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  #portfolio .section-sub { white-space: normal; max-width: 100%; }
+}
+/* Label-tag dentro da coluna de texto: sempre centralizado */
+.pf-col-text .label-tag {
+  align-self: center;
 }
 
 .section-glow {
@@ -581,6 +594,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 
   /* Vídeo no mobile: phone mockup auto-sizes */
   .pf-row-video { align-items: center; }
+  .pf-row-video .pf-col-media { padding-top: 0; justify-content: center; }
 }
 
 /* ── Design Gallery (crossfade) ── */
@@ -641,14 +655,17 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* Linha de vídeo: centralizadas verticalmente */
+/* Linha de vídeo: phone alinhado com o h3 (início) até meio do botão (fim) */
 .pf-row-video {
-  align-items: center;
+  align-items: start;
 }
 .pf-row-video .pf-col-media {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  /* empurra o phone para baixo até o nível do h3 "Produção Audiovisual"
+     (medido iterativamente: 3rem alinha phone.top ≈ h3.top) */
+  padding-top: 3rem;
 }
 
 /* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
@@ -741,7 +758,8 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 */
 .mockup-frame-phone {
   width: 100%;
-  max-width: 340px;
+  /* 237px → altura ≈ 348px (de Produção Audiovisual até meio do btn) */
+  max-width: 237px;
   /* Proporção real do PNG */
   aspect-ratio: 438 / 642;
   /* overflow:hidden evita que o vídeo vaze fora do frame */
