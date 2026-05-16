@@ -204,6 +204,13 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-col-text .label-tag {
   align-self: center;
 }
+/* Label-tag centralizado acima das duas colunas */
+.pf-row-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-bottom: 1rem;
+  order: 0;
+}
 
 .section-glow {
   position: absolute; width: 400px; height: 400px;
@@ -758,8 +765,8 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 */
 .mockup-frame-phone {
   width: 100%;
-  /* 237px → altura ≈ 348px (de Produção Audiovisual até meio do btn) */
-  max-width: 237px;
+  /* 251px → altura ≈ 368px (de Produção Audiovisual até fundo do btn) */
+  max-width: 251px;
   /* Proporção real do PNG */
   aspect-ratio: 438 / 642;
   /* overflow:hidden evita que o vídeo vaze fora do frame */
