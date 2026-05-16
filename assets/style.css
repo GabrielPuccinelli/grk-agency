@@ -181,7 +181,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 
 .section-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700; line-height: 1.15;
 }
@@ -246,7 +246,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 .service-icon svg { width: 26px; height: 26px; }
 
-.service-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: .5rem; }
+.service-title { font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: .5rem; }
 .service-desc { color: #6b7280; font-size: .875rem; line-height: 1.65; margin-bottom: 1rem; }
 .service-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .4rem; align-items: center; }
 .service-list li {
@@ -276,7 +276,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 .process-step:hover { border-color: rgba(212,168,67,.2); }
 .process-number {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 3rem; font-weight: 900;
   background: linear-gradient(135deg, rgba(212,168,67,.3), rgba(212,168,67,.08));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
@@ -497,7 +497,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 
 .pf-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(1.5rem, 2.4vw, 2.1rem);
   font-weight: 700;
   line-height: 1.2;
