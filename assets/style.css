@@ -593,16 +593,16 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 @media (max-width: 900px) {
   .pf-row {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-    padding: 3.5rem 0 !important;
+    gap: 1.5rem !important;
+    padding: 2.5rem 0 !important;
   }
   .pf-row-reverse .pf-col-text,
   .pf-row-reverse .pf-col-media { order: unset; }
 
-  /* Vídeo no mobile: phone centralizado, tamanho razoável */
+  /* Vídeo no mobile: phone centralizado, ocupa 70% da coluna */
   .pf-row-video { align-items: center; }
   .pf-row-video .pf-col-media { align-items: center; justify-content: center; padding-top: 0; }
-  .pf-row-video .mockup-frame-phone { width: 100%; max-width: 55%; height: auto; }
+  .pf-row-video .mockup-frame-phone { width: 70% !important; max-width: 260px !important; height: auto !important; margin: 0 auto; }
 }
 
 /* ── Design Gallery (crossfade) ── */
@@ -1273,7 +1273,7 @@ select.form-input option { background: var(--dark-3); }
 
   /* Portfolio pf-row */
   .pf-gallery-box { max-width: 88% !important; }
-  .mockup-frame-phone { max-width: 200px !important; }
+  .mockup-frame-phone { max-width: 240px !important; }
   .mockup-frame-laptop { max-width: 100% !important; }
 
   /* CTA */
