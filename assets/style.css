@@ -599,10 +599,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   .pf-row-reverse .pf-col-text,
   .pf-row-reverse .pf-col-media { order: unset; }
 
-  /* Vídeo no mobile: phone volta ao tamanho fixo */
+  /* Vídeo no mobile: phone centralizado, tamanho razoável */
   .pf-row-video { align-items: center; }
   .pf-row-video .pf-col-media { align-items: center; justify-content: center; padding-top: 0; }
-  .pf-row-video .mockup-frame-phone { height: auto; width: 100%; max-width: 220px; }
+  .pf-row-video .mockup-frame-phone { width: 100%; max-width: 55%; height: auto; }
 }
 
 /* ── Design Gallery (crossfade) ── */
@@ -663,22 +663,22 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* Linha de vídeo: phone ocupa a mesma altura da coluna de texto */
+/* Linha de vídeo: phone do mesmo tamanho visual que a galeria de design */
 .pf-row-video {
-  align-items: stretch;   /* ambas as colunas esticam à altura da maior */
+  align-items: center;
 }
 .pf-row-video .pf-col-media {
   display: flex;
-  align-items: stretch;   /* phone preenche toda a altura da coluna */
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   padding-top: 0;
 }
-/* phone cresce para a altura total da coluna, largura derivada do aspect-ratio */
+/* max-width: 65% espelha exatamente o .pf-gallery-box */
 .pf-row-video .mockup-frame-phone {
-  height: 115%;
-  width: auto;
-  max-width: none;
-  align-self: center;
+  width: 100%;
+  max-width: 65%;
+  height: auto;
+  margin: 0 auto;
 }
 
 /* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
