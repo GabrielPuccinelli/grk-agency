@@ -675,9 +675,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 }
 /* phone cresce para a altura total da coluna, largura derivada do aspect-ratio */
 .pf-row-video .mockup-frame-phone {
-  height: 100%;
+  height: 115%;
   width: auto;
   max-width: none;
+  align-self: center;
 }
 
 /* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
