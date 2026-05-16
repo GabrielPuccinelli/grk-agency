@@ -332,21 +332,117 @@
           </div>
           <div class="pf-col-media">
             <div class="mockup-frame mockup-frame-phone">
-              <!-- PNG do celular fica ATRÁS do vídeo (z-index 0) -->
               <img src="assets/mockup-phone.png" class="mockup-behind" alt="">
-              <!-- Vídeo fica NA FRENTE (z-index 2), posicionado dentro da tela -->
-              <div class="mockup-screen-area pf-video-box">
-                <video class="pf-media-img pf-video pf-video-contain" preload="metadata" loop playsinline>
-                  <source src="assets/video/LYX-web.mp4" type="video/mp4" />
-                </video>
-                <div class="pf-play-overlay">
-                  <button class="pf-play-btn" aria-label="Reproduzir vídeo LYX">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  </button>
+              <!-- Carrossel de vídeos — desliza da direita para a esquerda a cada 3.5s -->
+              <div class="mockup-screen-area phone-carousel" id="phone-carousel">
+                <div class="phone-carousel-track" id="phone-carousel-track">
+
+                  <!-- Slide 1 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/LYX-web.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 2 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video1.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 3 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video2.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 4 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video3.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 5 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video4.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 6 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video5.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 7 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video6.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 8 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video7.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 9 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video8.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 10 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video9.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 11 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video10.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 12 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video11.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 13 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video12.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 14 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video13.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
+                  <!-- Slide 15 -->
+                  <div class="phone-slide">
+                    <video preload="metadata" playsinline muted><source src="assets/video/Video14.mp4" type="video/mp4"/></video>
+                    <div class="pf-play-overlay"><button class="pf-play-btn" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button></div>
+                    <button class="pf-pause-btn" style="display:none;" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                  </div>
+
                 </div>
-                <button class="pf-pause-btn" aria-label="Pausar vídeo" style="display:none;">
-                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                </button>
               </div>
             </div>
           </div>

@@ -681,6 +681,34 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   margin: 0 auto;
 }
 
+/* ── Phone Carousel ── */
+.phone-carousel {
+  position: relative;
+  overflow: hidden;
+}
+.phone-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .45s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+.phone-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+.phone-slide video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
 .pf-video-box {
   position: relative;
