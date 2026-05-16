@@ -599,9 +599,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   .pf-row-reverse .pf-col-text,
   .pf-row-reverse .pf-col-media { order: unset; }
 
-  /* Vídeo no mobile: phone mockup auto-sizes */
+  /* Vídeo no mobile: phone volta ao tamanho fixo */
   .pf-row-video { align-items: center; }
-  .pf-row-video .pf-col-media { padding-top: 0; justify-content: center; }
+  .pf-row-video .pf-col-media { align-items: center; justify-content: center; padding-top: 0; }
+  .pf-row-video .mockup-frame-phone { height: auto; width: 100%; max-width: 220px; }
 }
 
 /* ── Design Gallery (crossfade) ── */
@@ -662,17 +663,21 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .pf-gallery-box:hover .pf-gallery-hint { opacity: 1; }
 .pf-gallery-hint svg { color: var(--gold); }
 
-/* Linha de vídeo: phone alinhado com o h3 (início) até meio do botão (fim) */
+/* Linha de vídeo: phone ocupa a mesma altura da coluna de texto */
 .pf-row-video {
-  align-items: start;
+  align-items: stretch;   /* ambas as colunas esticam à altura da maior */
 }
 .pf-row-video .pf-col-media {
   display: flex;
-  align-items: center;
+  align-items: stretch;   /* phone preenche toda a altura da coluna */
   justify-content: flex-start;
-  /* empurra o phone para baixo até o nível do h3 "Produção Audiovisual"
-     (medido iterativamente: 3rem alinha phone.top ≈ h3.top) */
-  padding-top: 3rem;
+  padding-top: 0;
+}
+/* phone cresce para a altura total da coluna, largura derivada do aspect-ratio */
+.pf-row-video .mockup-frame-phone {
+  height: 100%;
+  width: auto;
+  max-width: none;
 }
 
 /* ── Container do vídeo — portrait 1280×2276, moldura dourada justa ── */
