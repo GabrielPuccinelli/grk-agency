@@ -320,6 +320,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 #lightbox {
   position: fixed; inset: 0; z-index: 9990;
   flex-direction: column;
+  overflow: hidden;
   animation: lb-in .25s ease both;
 }
 @keyframes lb-in {
@@ -359,14 +360,17 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 /* Stage central */
 .lb-stage {
   position: relative; z-index: 1;
-  flex: 1; display: flex; align-items: center; justify-content: center;
+  flex: 1 1 0; display: flex; align-items: center; justify-content: center;
   padding: .5rem 4rem;
   min-height: 0;
+  overflow: hidden;
 }
 
 .lb-img-wrap {
   display: flex; align-items: center; justify-content: center;
   width: 100%; height: 100%;
+  min-height: 0;
+  overflow: hidden;
   transition: transform .25s ease;
 }
 .lb-img-wrap.zoomed { cursor: zoom-out; }
@@ -426,10 +430,11 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 /* Filmstrip de thumbnails */
 .lb-filmstrip {
   position: relative; z-index: 2;
+  flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   gap: .625rem;
   padding: .625rem 1.5rem 1.125rem;
-  overflow-x: auto;
+  overflow-x: auto; overflow-y: hidden;
   background: rgba(0,0,0,.25);
   border-top: 1px solid rgba(255,255,255,.05);
   scrollbar-width: thin;
