@@ -185,16 +185,33 @@ sections.forEach(s => sectionObserver.observe(s));
       thumb.className = 'lb-thumb' + (i === current ? ' lb-thumb-active' : '');
 
       if (isVideo(card)) {
-        /* Thumbnail de vídeo: primeiro frame via preload=metadata */
+        /* Thumbnail de vídeo: captura o primeiro frame via canvas após seek */
+        thumb.style.position = 'relative';
+        thumb.style.background = '#111';
+
         const v = document.createElement('video');
-        v.src = src; v.preload = 'metadata'; v.muted = true;
-        v.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none;';
+        v.src = src;
+        v.preload = 'metadata';
+        v.muted = true;
+        v.playsInline = true;
+        v.crossOrigin = 'anonymous';
+        v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;';
         thumb.appendChild(v);
+
+        /* Força o browser a renderizar o primeiro frame */
+        v.addEventListener('loadedmetadata', () => { v.currentTime = 0.5; }, { once: true });
+        v.addEventListener('error', () => { v.style.display = 'none'; }, { once: true });
+
+        /* Número do vídeo (fallback visual sempre visível) */
+        const numEl = document.createElement('span');
+        numEl.style.cssText = 'position:absolute;top:4px;left:7px;font-size:10px;color:rgba(255,255,255,.45);pointer-events:none;z-index:2;font-family:sans-serif;font-weight:600;';
+        numEl.textContent = (i + 1);
+        thumb.appendChild(numEl);
+
         /* Ícone play sobre o thumb */
         const icon = document.createElement('div');
-        icon.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
-        icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.85)"><path d="M8 5v14l11-7z"/></svg>';
-        thumb.style.position = 'relative';
+        icon.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;pointer-events:none;';
+        icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,.75)"><path d="M8 5v14l11-7z"/></svg>';
         thumb.appendChild(icon);
       } else {
         const tImg = document.createElement('img');
