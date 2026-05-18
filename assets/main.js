@@ -162,6 +162,14 @@ sections.forEach(s => sectionObserver.observe(s));
   let current = 0;
   let zoomed = false;
 
+  /* Fisher-Yates shuffle */
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+
   /* Coleta itens por grupo: null = imagens de design, 'video' = vídeos */
   function collect(group) {
     if (group) {
@@ -169,6 +177,7 @@ sections.forEach(s => sectionObserver.observe(s));
     } else {
       items = Array.from(document.querySelectorAll('.portfolio-clickable:not([data-group])'));
     }
+    shuffle(items); /* ordem aleatória a cada abertura */
   }
 
   function isVideo(card) { return card.dataset.group === 'video'; }
@@ -249,12 +258,14 @@ sections.forEach(s => sectionObserver.observe(s));
     updateFilmstrip();
   }
 
-  function open(index, group) {
-    collect(group || null);
+  function open(startCard, group) {
+    collect(group || null); /* collect já embaralha */
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     buildFilmstrip();
-    show(index);
+    /* Encontra o card clicado no array embaralhado */
+    const idx = startCard ? Math.max(0, items.indexOf(startCard)) : 0;
+    show(idx);
   }
 
   function close() {
@@ -277,18 +288,12 @@ sections.forEach(s => sectionObserver.observe(s));
 
   /* Imagens de design (sem data-group) */
   document.querySelectorAll('.portfolio-clickable:not([data-group])').forEach((card) => {
-    card.addEventListener('click', () => {
-      const list = Array.from(document.querySelectorAll('.portfolio-clickable:not([data-group])'));
-      open(list.indexOf(card), null);
-    });
+    card.addEventListener('click', () => open(card, null));
   });
 
   /* Vídeos (data-group="video") */
   document.querySelectorAll('.portfolio-clickable[data-group="video"]').forEach((card) => {
-    card.addEventListener('click', () => {
-      const list = Array.from(document.querySelectorAll('.portfolio-clickable[data-group="video"]'));
-      open(list.indexOf(card), 'video');
-    });
+    card.addEventListener('click', () => open(card, 'video'));
   });
 
   btnClose.addEventListener('click', close);
@@ -304,8 +309,13 @@ sections.forEach(s => sectionObserver.observe(s));
     if (e.key === 'ArrowRight') show(current + 1);
   });
 
-  /* Expõe função para o carrossel do phone */
-  window._lbOpenVideo = (slideIndex) => open(slideIndex, 'video');
+  /* Expõe funções para uso externo */
+  window._lbOpen = open;
+  window._lbOpenVideo = (slideIndex) => {
+    const allVideoCards = Array.from(document.querySelectorAll('.portfolio-clickable[data-group="video"]'));
+    const card = allVideoCards[slideIndex] || allVideoCards[0];
+    open(card, 'video');
+  };
 })();
 
 /* ── Particles (lightweight canvas) ── */
@@ -512,7 +522,7 @@ document.querySelectorAll('.pf-video').forEach(video => {
 
   /* Clique → abre lightbox na imagem que está visível agora */
   gallery.addEventListener('click', () => {
-    const anchors = gallery.parentElement.querySelectorAll('.pf-lb-anchors .portfolio-clickable');
-    if (anchors[current]) anchors[current].click();
+    const anchors = Array.from(gallery.parentElement.querySelectorAll('.pf-lb-anchors .portfolio-clickable'));
+    if (anchors[current] && window._lbOpen) window._lbOpen(anchors[current], null);
   });
 }());
