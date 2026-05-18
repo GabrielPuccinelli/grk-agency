@@ -599,10 +599,10 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
   .pf-row-reverse .pf-col-text,
   .pf-row-reverse .pf-col-media { order: unset; }
 
-  /* Vídeo no mobile: phone centralizado, ocupa 70% da coluna */
+  /* Vídeo no mobile: phone centralizado, ocupa 85% da coluna */
   .pf-row-video { align-items: center; }
   .pf-row-video .pf-col-media { align-items: center; justify-content: center; padding-top: 0; }
-  .pf-row-video .mockup-frame-phone { width: 70% !important; max-width: 260px !important; height: auto !important; margin: 0 auto; }
+  .pf-row-video .mockup-frame-phone { width: 85% !important; max-width: 360px !important; height: auto !important; margin: 0 auto; }
 }
 
 /* ── Design Gallery (crossfade) ── */
@@ -1273,7 +1273,7 @@ select.form-input option { background: var(--dark-3); }
 
   /* Portfolio pf-row */
   .pf-gallery-box { max-width: 88% !important; }
-  .mockup-frame-phone { max-width: 240px !important; }
+  .mockup-frame-phone { max-width: 360px !important; }
   .mockup-frame-laptop { max-width: 100% !important; }
 
   /* CTA */
