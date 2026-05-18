@@ -144,6 +144,7 @@ sections.forEach(s => sectionObserver.observe(s));
   const lb         = document.getElementById('lightbox');
   const overlay    = document.getElementById('lb-overlay');
   const img        = document.getElementById('lb-img');
+  const lbVideo    = document.getElementById('lb-video');
   const imgWrap    = img.parentElement;
   const titleEl    = document.getElementById('lb-title');
   const descEl     = document.getElementById('lb-desc');
@@ -161,11 +162,18 @@ sections.forEach(s => sectionObserver.observe(s));
   let current = 0;
   let zoomed = false;
 
-  function collect() {
-    items = Array.from(document.querySelectorAll('.portfolio-clickable'));
+  /* Coleta itens por grupo: null = imagens de design, 'video' = vídeos */
+  function collect(group) {
+    if (group) {
+      items = Array.from(document.querySelectorAll(`.portfolio-clickable[data-group="${group}"]`));
+    } else {
+      items = Array.from(document.querySelectorAll('.portfolio-clickable:not([data-group])'));
+    }
   }
 
-  /* Constrói a tira de thumbnails para o grupo atual */
+  function isVideo(card) { return card.dataset.group === 'video'; }
+
+  /* Constrói a tira de thumbnails */
   function buildFilmstrip() {
     filmstrip.innerHTML = '';
     if (items.length <= 1) return;
@@ -175,17 +183,30 @@ sections.forEach(s => sectionObserver.observe(s));
       if (!src) return;
       const thumb = document.createElement('div');
       thumb.className = 'lb-thumb' + (i === current ? ' lb-thumb-active' : '');
-      const tImg = document.createElement('img');
-      tImg.src = src;
-      tImg.alt = card.dataset.title || '';
-      tImg.loading = 'lazy';
-      thumb.appendChild(tImg);
+
+      if (isVideo(card)) {
+        /* Thumbnail de vídeo: primeiro frame via preload=metadata */
+        const v = document.createElement('video');
+        v.src = src; v.preload = 'metadata'; v.muted = true;
+        v.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none;';
+        thumb.appendChild(v);
+        /* Ícone play sobre o thumb */
+        const icon = document.createElement('div');
+        icon.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;';
+        icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.85)"><path d="M8 5v14l11-7z"/></svg>';
+        thumb.style.position = 'relative';
+        thumb.appendChild(icon);
+      } else {
+        const tImg = document.createElement('img');
+        tImg.src = src; tImg.alt = card.dataset.title || ''; tImg.loading = 'lazy';
+        thumb.appendChild(tImg);
+      }
+
       thumb.addEventListener('click', (e) => { e.stopPropagation(); show(i); });
       filmstrip.appendChild(thumb);
     });
   }
 
-  /* Atualiza destaque no filmstrip e rola para o thumb ativo */
   function updateFilmstrip() {
     const thumbs = filmstrip.querySelectorAll('.lb-thumb');
     thumbs.forEach((t, i) => t.classList.toggle('lb-thumb-active', i === current));
@@ -200,21 +221,33 @@ sections.forEach(s => sectionObserver.observe(s));
     const card = items[current];
     setZoom(false);
 
-    img.src = card.dataset.lightbox;
-    img.alt = card.dataset.title || '';
+    if (isVideo(card)) {
+      img.style.display = 'none';
+      lbVideo.style.display = 'block';
+      lbVideo.pause();
+      lbVideo.src = card.dataset.lightbox;
+      lbVideo.load();
+      btnZoom.style.visibility = 'hidden';
+    } else {
+      lbVideo.pause(); lbVideo.src = '';
+      lbVideo.style.display = 'none';
+      img.style.display = 'block';
+      img.src = card.dataset.lightbox;
+      img.alt = card.dataset.title || '';
+      btnZoom.style.visibility = 'visible';
+    }
+
     titleEl.textContent = card.dataset.title || '';
     descEl.textContent  = card.dataset.desc  || '';
     tagEl.textContent   = card.dataset.tag   || 'Portfólio';
-
     counter.textContent = items.length > 1 ? (current + 1) + ' / ' + items.length : '';
     btnPrev.style.display = items.length > 1 ? 'flex' : 'none';
     btnNext.style.display = items.length > 1 ? 'flex' : 'none';
-
     updateFilmstrip();
   }
 
-  function open(index) {
-    collect();
+  function open(index, group) {
+    collect(group || null);
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
     buildFilmstrip();
@@ -225,6 +258,9 @@ sections.forEach(s => sectionObserver.observe(s));
     lb.style.display = 'none';
     document.body.style.overflow = '';
     img.src = '';
+    lbVideo.pause(); lbVideo.src = '';
+    lbVideo.style.display = 'none';
+    img.style.display = 'block';
     filmstrip.innerHTML = '';
   }
 
@@ -236,8 +272,20 @@ sections.forEach(s => sectionObserver.observe(s));
     zoomOut.classList.toggle('hidden', !zoomed);
   }
 
-  document.querySelectorAll('.portfolio-clickable').forEach((card) => {
-    card.addEventListener('click', () => { collect(); open(items.indexOf(card)); });
+  /* Imagens de design (sem data-group) */
+  document.querySelectorAll('.portfolio-clickable:not([data-group])').forEach((card) => {
+    card.addEventListener('click', () => {
+      const list = Array.from(document.querySelectorAll('.portfolio-clickable:not([data-group])'));
+      open(list.indexOf(card), null);
+    });
+  });
+
+  /* Vídeos (data-group="video") */
+  document.querySelectorAll('.portfolio-clickable[data-group="video"]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const list = Array.from(document.querySelectorAll('.portfolio-clickable[data-group="video"]'));
+      open(list.indexOf(card), 'video');
+    });
   });
 
   btnClose.addEventListener('click', close);
@@ -252,6 +300,9 @@ sections.forEach(s => sectionObserver.observe(s));
     if (e.key === 'ArrowLeft')  show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
   });
+
+  /* Expõe função para o carrossel do phone */
+  window._lbOpenVideo = (slideIndex) => open(slideIndex, 'video');
 })();
 
 /* ── Particles (lightweight canvas) ── */
@@ -378,13 +429,14 @@ document.querySelectorAll('.pf-video').forEach(video => {
   carousel.addEventListener('mouseleave', () => { paused = false; });
 
   /* Play / Pause em cada slide */
-  slides.forEach((slide) => {
+  slides.forEach((slide, slideIndex) => {
     const video   = slide.querySelector('video');
     const overlay = slide.querySelector('.pf-play-overlay');
     const playBtn = slide.querySelector('.pf-play-btn');
     const pauseBtn = slide.querySelector('.pf-pause-btn');
     if (!video || !overlay || !playBtn || !pauseBtn) return;
 
+    /* Clique no botão play → reproduz o vídeo no próprio mockup */
     playBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       overlay.style.display  = 'none';
@@ -408,12 +460,21 @@ document.querySelectorAll('.pf-video').forEach(video => {
       setTimeout(() => goTo(current + 1), 600);
     });
 
-    video.addEventListener('click', () => {
+    /* Clique no vídeo (fora dos botões) → abre lightbox com todos os vídeos */
+    video.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (!video.paused) {
         video.pause();
         overlay.style.display  = 'flex';
         pauseBtn.style.display = 'none';
       }
+      if (window._lbOpenVideo) window._lbOpenVideo(slideIndex);
+    });
+
+    /* Clique no overlay fora do botão play → abre lightbox */
+    overlay.addEventListener('click', (e) => {
+      if (e.target === playBtn || playBtn.contains(e.target)) return;
+      if (window._lbOpenVideo) window._lbOpenVideo(slideIndex);
     });
   });
 
