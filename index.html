@@ -37,7 +37,7 @@
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/style.css?v=4" />
+  <link rel="stylesheet" href="assets/style.css?v=5" />
 </head>
 <body class="bg-dark text-white font-sans antialiased">
 
@@ -818,18 +818,19 @@
         </button>
       </div>
     </div>
-    <!-- Imagem -->
+    <!-- Setas sempre visíveis (fora do stage) -->
+    <button id="lb-prev" class="lb-nav lb-nav--prev">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="lb-next" class="lb-nav lb-nav--next">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </button>
+    <!-- Stage da imagem/vídeo -->
     <div class="lb-stage">
-      <button id="lb-prev" class="lb-nav lb-nav--prev">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-      </button>
       <div class="lb-img-wrap">
         <img id="lb-img" src="" alt="" class="lb-img" />
         <video id="lb-video" class="lb-video" playsinline controls style="display:none;"></video>
       </div>
-      <button id="lb-next" class="lb-nav lb-nav--next">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </button>
     </div>
     <!-- Counter -->
     <div id="lb-counter" class="lb-counter"></div>
@@ -844,6 +845,6 @@
 
   <!-- AOS + Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="assets/main.js?v=4"></script>
+  <script src="assets/main.js?v=5"></script>
 </body>
 </html>

@@ -356,66 +356,63 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .lb-btn:hover { background: rgba(255,255,255,.14); }
 .lb-btn--close:hover { background: rgba(220,50,50,.3); transform: rotate(90deg); }
 
-/* Stage central */
-.lb-stage {
-  position: relative; z-index: 1;
-  flex: 1; display: flex; align-items: center; justify-content: center;
-  padding: .25rem 3rem;
-  min-height: 0;
-}
-
-.lb-img-wrap {
-  display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 100%;
-  transition: transform .25s ease;
-}
-.lb-img-wrap.zoomed { cursor: zoom-out; }
-
-.lb-img {
-  max-width: 100%;
-  width: auto;
-  height: calc(100vh - 170px);
-  object-fit: contain;
-  border-radius: .875rem;
-  box-shadow: 0 24px 80px rgba(0,0,0,.8);
-  border: 1px solid rgba(255,255,255,.07);
-  transition: transform .3s ease;
-  display: block;
-  user-select: none;
-}
-.lb-img.zoomed {
-  height: auto; max-width: none;
-  transform: scale(1.8);
-}
-.lb-video {
-  max-width: 100%;
-  width: auto;
-  height: calc(100vh - 170px);
-  object-fit: contain;
-  border-radius: .875rem;
-  box-shadow: 0 24px 80px rgba(0,0,0,.8);
-  border: 1px solid rgba(255,255,255,.07);
-  background: #000;
-  display: block;
-}
-
-/* Nav arrows */
+/* Nav arrows — posicionadas no #lightbox para ficarem SEMPRE visíveis */
 .lb-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 48px; height: 48px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.15);
-  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(0,0,0,.6);
   color: #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: background .2s, transform .2s;
-  z-index: 2;
+  z-index: 9995;
 }
-.lb-nav:hover { background: rgba(212,168,67,.25); border-color: rgba(212,168,67,.4); }
+.lb-nav:hover { background: rgba(212,168,67,.5); border-color: rgba(212,168,67,.7); }
 .lb-nav:disabled { opacity: .2; cursor: default; pointer-events: none; }
 .lb-nav--prev { left: .75rem; }
 .lb-nav--next { right: .75rem; }
 .lb-nav--prev:hover { transform: translateY(-50%) translateX(-2px); }
 .lb-nav--next:hover { transform: translateY(-50%) translateX(2px); }
+
+/* Stage central */
+.lb-stage {
+  position: relative; z-index: 1;
+  flex: 1; display: flex; align-items: stretch; justify-content: center;
+  padding: .5rem 0;
+  min-height: 0;
+}
+
+.lb-img-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%;
+  min-height: 0;
+  transition: transform .25s ease;
+}
+.lb-img-wrap.zoomed { cursor: zoom-out; }
+
+.lb-img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  border-radius: .875rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,.8);
+  border: 1px solid rgba(255,255,255,.07);
+  transition: transform .3s ease;
+  user-select: none;
+}
+.lb-img.zoomed {
+  width: auto; height: auto;
+  transform: scale(1.8);
+}
+.lb-video {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  border-radius: .875rem;
+  box-shadow: 0 24px 80px rgba(0,0,0,.8);
+  border: 1px solid rgba(255,255,255,.07);
+  background: #000;
+}
 
 /* Counter */
 .lb-counter {
@@ -1307,7 +1304,7 @@ select.form-input option { background: var(--dark-3); }
   .whatsapp-float { width: 50px; height: 50px; bottom: 1.25rem; right: 1.25rem; }
   .whatsapp-float svg { width: 1.4rem; height: 1.4rem; }
   .lb-nav   { width: 38px; height: 38px; }
-  .lb-stage { padding: .75rem 3rem; }
+  .lb-stage { padding: .5rem 0; }
   .form-input { font-size: .875rem; }
   .px-6 { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 }

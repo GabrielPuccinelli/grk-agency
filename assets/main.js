@@ -402,7 +402,7 @@ document.querySelectorAll('.pf-video').forEach(video => {
   if (!carousel || !track) return;
 
   const slides = Array.from(track.querySelectorAll('.phone-slide'));
-  let current  = 0;
+  let current  = Math.floor(Math.random() * slides.length); /* começa aleatório */
   let paused   = false;
   let timer    = null;
 
@@ -424,6 +424,11 @@ document.querySelectorAll('.pf-video').forEach(video => {
     current = (index + slides.length) % slides.length;
     track.style.transform = `translateX(-${current * 100}%)`;
   }
+
+  /* Aplica posição inicial aleatória sem animação */
+  track.style.transition = 'none';
+  track.style.transform  = `translateX(-${current * 100}%)`;
+  requestAnimationFrame(() => { track.style.transition = ''; });
 
   /* Timer automático de 3.5s */
   function resetTimer() {
@@ -502,7 +507,11 @@ document.querySelectorAll('.pf-video').forEach(video => {
   const imgs    = Array.from(gallery.querySelectorAll('.pf-fade-img'));
   if (!imgs.length) return;
 
-  let current = 0;
+  /* Começa em imagem aleatória */
+  let current = Math.floor(Math.random() * imgs.length);
+  imgs.forEach(img => img.classList.remove('pf-fade-active'));
+  imgs[current].classList.add('pf-fade-active');
+
   let paused  = false;
 
   /* Avança para a próxima imagem com crossfade */
