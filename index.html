@@ -37,7 +37,7 @@
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/style.css?v=3" />
 </head>
 <body class="bg-dark text-white font-sans antialiased">
 
@@ -331,6 +331,24 @@
             </a>
           </div>
           <div class="pf-col-media">
+            <!-- Âncoras ocultas para o lightbox de vídeos -->
+            <div class="pf-lb-anchors">
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/LYX-web.mp4" data-title="Vídeo 1" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video1.mp4"   data-title="Vídeo 2"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video2.mp4"   data-title="Vídeo 3"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video3.mp4"   data-title="Vídeo 4"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video4.mp4"   data-title="Vídeo 5"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video5.mp4"   data-title="Vídeo 6"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video6.mp4"   data-title="Vídeo 7"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video7.mp4"   data-title="Vídeo 8"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video8.mp4"   data-title="Vídeo 9"  data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video9.mp4"   data-title="Vídeo 10" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video10.mp4"  data-title="Vídeo 11" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video11.mp4"  data-title="Vídeo 12" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video12.mp4"  data-title="Vídeo 13" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video13.mp4"  data-title="Vídeo 14" data-tag="Vídeo Institucional"></span>
+              <span class="portfolio-clickable" data-group="video" data-lightbox="assets/video/Video14.mp4"  data-title="Vídeo 15" data-tag="Vídeo Institucional"></span>
+            </div>
             <div class="mockup-frame mockup-frame-phone">
               <img src="assets/mockup-phone.png" class="mockup-behind" alt="">
               <!-- Carrossel de vídeos — desliza da direita para a esquerda a cada 3.5s -->
@@ -807,6 +825,7 @@
       </button>
       <div class="lb-img-wrap">
         <img id="lb-img" src="" alt="" class="lb-img" />
+        <video id="lb-video" class="lb-video" playsinline controls style="display:none;"></video>
       </div>
       <button id="lb-next" class="lb-nav lb-nav--next">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -825,6 +844,6 @@
 
   <!-- AOS + Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="assets/main.js"></script>
+  <script src="assets/main.js?v=3"></script>
 </body>
 </html>
