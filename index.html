@@ -37,7 +37,17 @@
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/style.css?v=5" />
+  <link rel="stylesheet" href="assets/style.css?v=15&t=20260525b" />
+
+  <!-- Three.js importmap (CSS3DRenderer + OrbitControls) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three":          "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+      "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body class="bg-dark text-white font-sans antialiased">
 
@@ -59,6 +69,7 @@
       </a>
 
       <nav class="hidden md:flex items-center gap-8">
+        <a href="#sobre" class="nav-link">Sobre</a>
         <a href="#servicos" class="nav-link">Serviços</a>
         <a href="#portfolio" class="nav-link">Portfólio</a>
         <a href="#parceiros" class="nav-link">Parceiros</a>
@@ -66,7 +77,7 @@
       </nav>
 
       <div class="hidden md:flex items-center gap-4">
-        <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20GRK%20Agency." target="_blank" class="btn-primary">
+        <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20GRK%20Project." target="_blank" class="btn-primary">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.842L.057 23.999l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.013-1.375l-.36-.214-3.742.981.998-3.648-.234-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
           WhatsApp
         </a>
@@ -82,6 +93,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu md:hidden">
       <div class="flex flex-col gap-6 p-8">
+        <a href="#sobre" class="mobile-nav-link">Sobre</a>
         <a href="#servicos" class="mobile-nav-link">Serviços</a>
         <a href="#portfolio" class="mobile-nav-link">Portfólio</a>
         <a href="#parceiros" class="mobile-nav-link">Parceiros</a>
@@ -96,23 +108,36 @@
     <div id="particles-js" class="absolute inset-0" style="z-index:1"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-16 items-center" style="z-index:2">
-      <div class="flex flex-col items-center text-center">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/30 bg-gold/5 text-gold text-sm font-medium mb-8 animate-fade-up">
+
+      <!-- Coluna de texto — tudo alinhado à esquerda -->
+      <div style="display:flex; flex-direction:column; align-items:flex-start; text-align:left;">
+
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/30 bg-gold/5 text-gold text-sm font-medium mb-6 animate-fade-up">
           <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
           GRK Project · Marketing Digital · Curitiba, PR
         </div>
-        <h1 class="font-display text-5xl md:text-7xl leading-tight mb-6 animate-fade-up" style="animation-delay:.1s">
-          <span style="color:#D4A843;font-weight:100;">SUA </span><span style="color:#ffffff;font-weight:700;">MARCA</span>,<br /><span style="color:#a0a0a0;font-weight:100;">NOSSA </span><span style="color:#D4A843;font-weight:700;">ARTE.</span>
+
+        <!-- Título grande -->
+        <h1 class="animate-fade-up" style="font-family:'aquarium',sans-serif; font-size:clamp(3.5rem,8vw,7rem); line-height:1; margin-bottom:1.5rem; animation-delay:.1s;">
+          <span style="color:#D4A843;">SUA </span><span style="color:#ffffff;">MARCA</span><br>
+          <span style="color:#a0a0a0;">NOSSA </span><span style="color:#D4A843;">ARTE.</span>
         </h1>
-        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-10 animate-fade-up" style="animation-delay:.2s;">
-          Criamos sites, vídeos e estratégias digitais<br>
-          que transformam marcas em referências.<br>
-          Do design ao conteúdo — tudo que a sua<br>
-          empresa precisa para dominar o digital.
+
+        <!-- Descrição -->
+        <p class="animate-fade-up" style="color:#9ca3af; font-size:1rem; line-height:1.7; margin-bottom:1rem; animation-delay:.2s;">
+          Criação de conteúdo visual estratégico para marcas que querem se destacar.
         </p>
-        <div class="flex flex-wrap gap-4 justify-center animate-fade-up" style="animation-delay:.3s">
-          <a href="#servicos" class="btn-primary text-base px-8 py-4">Ver Serviços</a>
-          <a href="#portfolio" class="btn-ghost text-base px-8 py-4">Nosso Portfólio</a>
+
+        <!-- Serviços -->
+        <p class="animate-fade-up" style="color:#D4A843; font-size:.8125rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:2.5rem; animation-delay:.25s;">
+          Design · Vídeo · Drone · Landing Pages
+        </p>
+
+        <!-- Botões -->
+        <div class="animate-fade-up" style="display:flex; flex-wrap:wrap; gap:1rem; animation-delay:.3s;">
+          <a href="#portfolio" class="btn-primary text-base px-8 py-4">Ver Portfólio</a>
+          <a href="#contato" class="btn-ghost text-base px-8 py-4">Solicitar Orçamento</a>
         </div>
 
       </div>
@@ -128,60 +153,138 @@
     </div>
   </section>
 
+  <!-- ░░ SOBRE ░░ -->
+  <section id="sobre" class="py-28 border-t border-dark-4">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <span class="label-tag">Quem somos</span>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">Sobre a <span class="text-gradient">GRK Project</span></h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+        <!-- Texto institucional -->
+        <div data-aos="fade-up" class="space-y-5">
+          <p class="text-gray-300 text-base leading-relaxed">
+            A <strong class="text-white">GRK Project</strong> é a empresa de criação de conteúdo visual de <strong class="text-white">Greik Martusewicz</strong>, VideoMaker e Designer Gráfico com mais de <strong class="text-gold">10 anos de experiência</strong> no mercado de comunicação digital, baseada em <strong class="text-white">Curitiba, PR</strong>.
+          </p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Com domínio completo do Pacote Adobe (Premiere, Photoshop, Illustrator) e edição ágil via CapCut, entregamos projetos audiovisuais e de design com alto padrão estético e foco em performance digital.
+          </p>
+          <p class="text-gray-400 text-base leading-relaxed">
+            Atendemos marcas de grande porte como <strong class="text-white">Coca-Cola FEMSA, Caixa Econômica Federal, GrowPower</strong> e <strong class="text-white">Apporte Auto</strong> — e levamos esse mesmo nível de qualidade para pequenas e médias empresas que querem resultado visual de agência sem pagar como agência.
+          </p>
+          <div class="pt-4">
+            <a href="#contato" class="btn-primary">Fale com a gente
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Diferenciais -->
+        <div data-aos="fade-up" data-aos-delay="100">
+          <div class="about-card-main">
+            <h3 class="font-display font-bold text-xl mb-6 text-white">Por que a <span class="text-gradient">GRK Project?</span></h3>
+            <ul class="space-y-4">
+              <li class="about-feature">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">10+ anos</strong> de experiência em criação visual estratégica</span>
+              </li>
+              <li class="about-feature">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span>Atendimento de <strong class="text-white">marcas nacionais</strong> como Coca-Cola e Caixa</span>
+              </li>
+              <li class="about-feature">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">Profissional completo:</strong> design, vídeo, drone e web em um só lugar</span>
+              </li>
+              <li class="about-feature">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span>Projetos <strong class="text-white">do briefing à entrega</strong> — sem intermediários</span>
+              </li>
+              <li class="about-feature">
+                <svg class="w-5 h-5 text-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <span><strong class="text-white">Qualidade de agência</strong> com preço acessível para PMEs</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ░░ SERVICES ░░ -->
   <section id="servicos" class="py-28 relative">
     <div class="section-glow left"></div>
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20" data-aos="fade-up">
         <span class="label-tag">O que fazemos</span>
-        <h2 class="section-title mt-4"><span style="color:#D4A843;font-weight:700;">SOLUÇÕES COMPLETAS</span><br /><span style="color:#a0a0a0;font-weight:100;">PARA </span><span style="color:#ffffff;font-weight:700;">SUA MARCA</span></h2>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;"><span style="color:#D4A843;">SOLUÇÕES COMPLETAS</span><br /><span style="color:#a0a0a0;">PARA </span><span style="color:#ffffff;">SUA MARCA</span></h2>
         <p class="section-sub">Do conceito à execução, entregamos tudo que a sua empresa precisa para se destacar no ambiente digital.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
+        <!-- Design Gráfico -->
         <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-          <div class="service-icon bg-blue-500/10 text-blue-400">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          </div>
-          <h3 class="service-title">Sites & Landing Pages</h3>
-          <p class="service-desc">Sites modernos, responsivos e otimizados para converter visitantes em clientes. Do portfólio institucional à landing page de alta performance.</p>
-          <ul class="service-list">
-            <li>Sites institucionais</li>
-            <li>Landing pages de conversão</li>
-            <li>E-commerce & lojas virtuais</li>
-            <li>SEO On-page incluído</li>
-          </ul>
-        </div>
-
-        <div class="service-card" data-aos="fade-up" data-aos-delay="80">
-          <div class="service-icon bg-red-500/10 text-red-400">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-          </div>
-          <h3 class="service-title">Produção de Vídeos</h3>
-          <p class="service-desc">Vídeos profissionais que contam a história da sua marca — do roteiro à edição final. Conteúdo para Reels, YouTube, campanhas e eventos.</p>
-          <ul class="service-list">
-            <li>Vídeos institucionais</li>
-            <li>Reels & Stories</li>
-            <li>Edição e motion graphics</li>
-            <li>Produção audiovisual</li>
-          </ul>
-        </div>
-
-        <div class="service-card" data-aos="fade-up" data-aos-delay="160">
           <div class="service-icon bg-purple-500/10">
             <img src="assets/pen-tool_3018799.png" alt="Design Gráfico" style="width:2rem;height:2rem;object-fit:contain;filter:invert(72%) sepia(51%) saturate(612%) hue-rotate(3deg) brightness(97%) contrast(91%);" />
           </div>
           <h3 class="service-title">Design Gráfico</h3>
-          <p class="service-desc">Identidade visual completa que posiciona sua marca de forma única e memorável. Criamos a linguagem visual que comunica seus valores.</p>
+          <p class="service-desc">Posts e artes para redes sociais, identidade visual completa, papelaria, folders e materiais para campanhas.</p>
           <ul class="service-list">
+            <li>Posts &amp; artes para redes sociais</li>
             <li>Identidade visual completa</li>
-            <li>Logotipos & brandbook</li>
-            <li>Materiais impressos</li>
-            <li>Artes digitais</li>
+            <li>Papelaria &amp; folders</li>
+            <li>Materiais para campanhas</li>
           </ul>
         </div>
 
+        <!-- Produção de Vídeo -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="80">
+          <div class="service-icon bg-red-500/10 text-red-400">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="service-title">Produção de Vídeo</h3>
+          <p class="service-desc">Vídeos institucionais, de vendas (VSL), reels, stories, documentários, videoclipes e conteúdo para YouTube.</p>
+          <ul class="service-list">
+            <li>Vídeos institucionais &amp; VSL</li>
+            <li>Reels, Stories &amp; YouTube</li>
+            <li>Documentários &amp; videoclipes</li>
+            <li>Edição &amp; motion graphics</li>
+          </ul>
+        </div>
+
+        <!-- Drone -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="160">
+          <div class="service-icon bg-sky-500/10">
+            <img src="assets/drone-icon.png" alt="Filmagem com Drone" style="width:2rem;height:2rem;object-fit:contain;filter:brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(175deg) brightness(1.4);" />
+          </div>
+          <h3 class="service-title">Filmagem com Drone</h3>
+          <p class="service-desc">Cobertura aérea para imobiliárias, construtoras, eventos e turismo — com entrega de imagens brutas ou com edição completa.</p>
+          <ul class="service-list">
+            <li>Imobiliárias &amp; construtoras</li>
+            <li>Eventos &amp; turismo</li>
+            <li>Imagens brutas ou editadas</li>
+            <li>Cobertura aérea profissional</li>
+          </ul>
+        </div>
+
+        <!-- Landing Pages -->
+        <div class="service-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="service-icon bg-blue-500/10 text-blue-400">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="service-title">Landing Pages</h3>
+          <p class="service-desc">Páginas de conversão criadas para vender: design atraente, copy estratégico e integração com formulários.</p>
+          <ul class="service-list">
+            <li>Design focado em conversão</li>
+            <li>Copy estratégico</li>
+            <li>Integração com formulários</li>
+            <li>SEO On-page incluído</li>
+          </ul>
+        </div>
 
       </div>
     </div>
@@ -193,7 +296,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20" data-aos="fade-up">
         <span class="label-tag">Como trabalhamos</span>
-        <h2 class="section-title mt-4">Nosso <span class="text-gradient">Processo</span></h2>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">Nosso <span class="text-gradient">Processo</span></h2>
         <p class="section-sub">Um método claro, transparente e focado em resultados.<br>Do briefing à entrega, você acompanha tudo.</p>
       </div>
 
@@ -228,7 +331,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16" data-aos="fade-up">
         <span class="label-tag">Nosso trabalho</span>
-        <h2 class="section-title mt-4">Portfólio <span class="text-gradient">Recente</span></h2>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">Portfólio <span class="text-gradient">Recente</span></h2>
         <p class="section-sub">Projetos reais, resultados reais. Veja algumas das marcas que transformamos.</p>
       </div>
 
@@ -485,11 +588,7 @@
             </a>
           </div>
           <div class="pf-col-media">
-            <div class="mockup-frame mockup-frame-laptop">
-              <!-- PNG do MacBook fica POR BAIXO do conteúdo (z-index 0) -->
-              <img src="assets/mockup-laptop.png" class="mockup-overlay-png mockup-behind" alt="">
-              <!-- Conteúdo fica POR CIMA do PNG (z-index 2) -->
-              <div class="mockup-screen-area"></div>
+            <div id="laptop-scene-container" class="laptop-scene-container">
             </div>
           </div>
         </div>
@@ -507,7 +606,7 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16" data-aos="fade-up">
         <span class="label-tag">Depoimentos</span>
-        <h2 class="section-title mt-4">O que nossos <span class="text-gradient">clientes dizem</span></h2>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">O que nossos <span class="text-gradient">clientes dizem</span></h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
@@ -575,8 +674,8 @@
       <!-- Header -->
       <div class="text-center mb-12" data-aos="fade-up">
         <span class="label-tag">Confiança</span>
-        <h2 class="section-title mt-4">Empresas que <span class="text-gradient">confiam no GRK Project</span></h2>
-        <p class="section-sub" style="white-space:nowrap;">Marcas que escolheram transformar sua presença digital com a gente.</p>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">Empresas que <span class="text-gradient">confiam no GRK Project</span></h2>
+        <p class="section-sub">Marcas que escolheram transformar sua presença digital com a gente.</p>
       </div>
 
       <!-- Frame / Moldura centralizada -->
@@ -625,14 +724,14 @@
       <div class="cta-banner">
         <div class="cta-glow"></div>
         <span class="label-tag">Pronto para crescer?</span>
-        <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
+        <h2 class="font-display text-4xl md:text-5xl mt-4 mb-6" style="font-family:'aquarium',sans-serif;font-weight:400;">
           Vamos Transformar<br /><span class="text-gradient">Sua Marca Juntos</span>
         </h2>
         <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
           Entre em contato agora e receba uma proposta personalizada sem compromisso. Respondemos em até 2 horas.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
-          <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20uma%20proposta%20da%20GRK%20Agency." target="_blank" class="btn-primary text-base px-8 py-4">
+          <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20uma%20proposta%20da%20GRK%20Project." target="_blank" class="btn-primary text-base px-8 py-4">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.842L.057 23.999l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.013-1.375l-.36-.214-3.742.981.998-3.648-.234-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
             Chamar no WhatsApp
           </a>
@@ -647,14 +746,14 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20" data-aos="fade-up">
         <span class="label-tag">Fale conosco</span>
-        <h2 class="section-title mt-4">Entre em <span class="text-gradient">Contato</span></h2>
+        <h2 class="section-title mt-4" style="font-family:'aquarium',sans-serif;">Entre em <span class="text-gradient">Contato</span></h2>
         <p class="section-sub">Preencha o formulário ou fale diretamente pelo WhatsApp.<br>Estamos prontos para ajudar.</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-16">
 
         <!-- Contact Info -->
-        <div data-aos="fade-right">
+        <div data-aos="fade-up">
           <div class="space-y-6 mb-12">
             <a href="https://wa.me/5541987897167" target="_blank" class="contact-info-card group">
               <div class="contact-icon bg-green-500/10 text-green-400 group-hover:bg-green-500/20 transition-colors">
@@ -696,7 +795,7 @@
         </div>
 
         <!-- Contact Form -->
-        <div data-aos="fade-left">
+        <div data-aos="fade-up" data-aos-delay="100">
           <form id="contact-form" class="space-y-5">
             <div class="grid md:grid-cols-2 gap-5">
               <div>
@@ -720,9 +819,10 @@
               <label class="form-label">Serviço de interesse</label>
               <select class="form-input">
                 <option value="">Selecione um serviço</option>
-                <option>Site / Landing Page</option>
-                <option>Produção de Vídeos</option>
                 <option>Design Gráfico</option>
+                <option>Produção de Vídeo</option>
+                <option>Filmagem com Drone</option>
+                <option>Landing Page / Site</option>
               </select>
             </div>
             <div>
@@ -839,12 +939,15 @@
   </div>
 
   <!-- WhatsApp Float -->
-  <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20GRK%20Agency." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+  <a href="https://wa.me/5541987897167?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20GRK%20Project." target="_blank" class="whatsapp-float" aria-label="WhatsApp">
     <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.842L.057 23.999l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.814 9.814 0 01-5.013-1.375l-.36-.214-3.742.981.998-3.648-.234-.374A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
   </a>
 
   <!-- AOS + Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="assets/main.js?v=5"></script>
+
+  <!-- 3D Laptop -->
+  <script type="module" src="assets/laptop3d.js?v=16"></script>
 </body>
 </html>
