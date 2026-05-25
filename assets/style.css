@@ -1295,7 +1295,7 @@ select.form-input option { background: var(--dark-3); }
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
   }
-  #inicio h1 { font-size: 1.9rem !important; line-height: 1.05 !important; }
+  #inicio h1 { font-size: 3.2rem !important; line-height: 0.9 !important; }
   #inicio p  { font-size: .9375rem !important; }
   #inicio .inline-flex.rounded-full { font-size: .68rem; padding: .3rem .65rem; }
   #inicio .flex.flex-wrap.gap-3 a,
