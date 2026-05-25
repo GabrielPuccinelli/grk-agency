@@ -261,6 +261,7 @@ footer     { border-top: 1px solid rgba(255,255,255,.06) !important; }
 .service-list li {
   color: #9ca3af; font-size: .8125rem;
   padding-left: .9rem; position: relative; width: 100%;
+  text-align: left;
 }
 .service-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: .75rem; }
 
@@ -1318,6 +1319,12 @@ select.form-input option { background: var(--dark-3); }
   .grid.md\:grid-cols-2.lg\:grid-cols-4 { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
   .grid.md\:grid-cols-3 { grid-template-columns: 1fr !important; }
   #portfolio-grid { grid-template-columns: 1fr !important; }
+
+  /* Hero — mobile: tudo centralizado */
+  .hero-col-text { align-items: center !important; text-align: center !important; }
+  .hero-col-text h1 { text-align: center !important; }
+  .hero-col-text p { text-align: center !important; }
+  .hero-col-text > div:last-child { justify-content: center !important; }
 
   /* Service cards — mobile: tudo alinhado à esquerda */
   .service-card { align-items: flex-start !important; text-align: left !important; }
