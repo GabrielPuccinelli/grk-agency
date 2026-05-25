@@ -1,13 +1,16 @@
 /**
- * laptop3d.js – v18
- * MacBook Pro 3D floating — iframe overlay navegável
- * Usa URL relativa "/" para evitar bloqueio X-Frame-Options
+ * laptop3d.js – v19
+ * MacBook Pro 3D floating — iframe overlay navegavel
+ * Fix: verifica se esta dentro de iframe para evitar loop infinito
  */
 import * as THREE from 'three';
 import { GLTFLoader }  from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
 (function () {
+  /* Nao inicializa se estiver dentro de um iframe (evita loop infinito) */
+  if (window !== window.top) return;
+
   const container = document.getElementById('laptop-scene-container');
   if (!container) return;
 
@@ -48,8 +51,8 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
   container.appendChild(iframeOverlay);
 
   const siteIframe = document.createElement('iframe');
-  /* URL relativa — sempre mesmo origem, nunca bloqueado */
   siteIframe.src = window.location.origin + '/';
+  siteIframe.scrolling = 'yes';
   Object.assign(siteIframe.style, {
     position:        'absolute',
     top:             '0', left: '0',
@@ -58,6 +61,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
     border:          'none',
     transformOrigin: '0 0',
     pointerEvents:   'auto',
+    overflow:        'auto',
   });
   iframeOverlay.appendChild(siteIframe);
 
@@ -105,7 +109,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
   }, undefined, err => console.error('[laptop3d]', err));
 
-  /* ── Projecao 2D do mesh da tela ─────────────────── */
+  /* ── Projecao 2D ────────────────────────────────── */
   const _v = new THREE.Vector3();
 
   function syncIframeOverlay () {
@@ -135,14 +139,11 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
     const h = maxY - minY;
     if (w <= 0 || h <= 0) return;
 
-    const scaleX = w / PX_W;
-    const scaleY = h / PX_H;
-
     Object.assign(iframeOverlay.style, {
       left: minX + 'px', top: minY + 'px',
       width: w + 'px',   height: h + 'px',
     });
-    siteIframe.style.transform       = `scale(${scaleX}, ${scaleY})`;
+    siteIframe.style.transform       = `scale(${w / PX_W}, ${h / PX_H})`;
     siteIframe.style.transformOrigin = '0 0';
   }
 
